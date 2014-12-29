@@ -14,6 +14,7 @@ if (Meteor.isClient) {
       Session.set("counter", Session.get("counter") + 1);
     }
   });
+
 }
 
 if (Meteor.isServer) {
@@ -21,3 +22,4 @@ if (Meteor.isServer) {
     // code to run on server at startup
   });
 }
+

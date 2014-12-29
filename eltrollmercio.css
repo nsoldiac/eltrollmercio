@@ -1,3 +1,30 @@
+/* CUSTOM CSS ELTROLLMERCIO */
+#back-cover  {
+	display: none;
+	z-index: 9000;
+	opacity: 0.5;
+	position: absolute;
+	background-color: black;
+	width: 100%;
+	height: 100%;
+}
+
+.voting-container {
+	top: 10%;
+	bottom: 10%;
+	left: 10%;
+	right: 10%;
+	display: none;
+	z-index: 9001;
+	position: fixed;
+	background-color: #eee;
+	max-width: 720px;
+	/*min-width: 320px;*/
+	height: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /* ESTRUCTURA GENERAL
 ========================================================================== */
 /* CALENDARIO */
@@ -241,9 +268,9 @@ body#home .ec-logo-slinks h1 a, body#home .ec-logo-slinks h2 a { background-imag
 .ui-box figcaption { background-color: #363533; padding: 10px; position: relative; z-index: 1; }
 .ui-box a.img { bottom: 0; position: absolute; }
 .ui-box h2 { font: 16px/110% 'glosabold'; margin: 0; }
-.ui-box h2 a { color: #fff; }
+.ui-box h2 a, .ui-box h2 span { color: #fff; }
 .ui-box h3, .f-tvm-last h3 { bottom: -10px; left: 0; margin: 0; position: absolute; text-transform: uppercase; z-index: 2; }
-.ui-box h3 a, .f-tvm-last h3 a { background-color: #fc0; color: #333; display: inline-block; font: 11px/16px 'prelobold'; padding: 0 15px 0 8px; }
+.ui-box h3 span, .f-tvm-last h3 a { background-color: #fc0; color: #333; display: inline-block; font: 11px/16px 'prelobold'; padding: 0 15px 0 8px; }
 .ui-box p { color: #bababa; font-size: 13px; line-height: 125%; margin: 0; }
 .ui-box p a { color: #bababa; text-decoration: underline; }
 .ui-box p a:hover { text-decoration: none; }
@@ -931,7 +958,7 @@ ul.Epl-list li.epl-active span { background: #f9c500; }
 /* MODULO BLOGS */
 .ec-mod-blogs { margin-bottom: 20px; }
 .ec-mod-blogs > h3 { background-color: #000; color: #f7c600; font: 20px/37px "prelobold"; margin: 0; padding-left: 10px; text-transform: uppercase; }
-.ec-mod-blogs > h3 > a { color: #f7c600; }
+.ec-mod-blogs > h3 > span { color: #f7c600; }
 .sl-mod-blogs { background-color: #222; padding: 15px 10px 0; }
 .sl-mod-blogs .ui-arrows { }
 .sl-mod-blogs .ui-arrows a { background-image: url("/i/bg_arrow_blogs.png"); bottom: 10px; color: #fff; font-size: 33px; height: 46px; line-height: 45px; width: 46px; }
