@@ -1,25 +1,206 @@
+Tasks = new Mongo.Collection("tasks");
+
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault("counter", 0);
+  // This code only runs on the client
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get("counter");
+  /*
+  Meteor.subscribe("emails");
+  Meteor.subscribe("meetings");
+  Meteor.subscribe("chats");
+
+  Template.body.helpers({
+    emails: function () {
+      if (Session.get("hideCompleted")) {
+        // If hide completed is checked, filter tasks
+        return Tasks.find({type: "email"}, {checked: {$ne: true}}, {sort: {createdAt: -1}});
+      } else {
+        // Otherwise, return all of the tasks
+        return Tasks.find({type: "email"}, {sort: {createdAt: -1}});
+      }
+    },
+    meetings: function () {
+      if (Session.get("hideCompleted")) {
+        // If hide completed is checked, filter tasks
+        return Tasks.find({type: "meeting"}, {checked: {$ne: true}}, {sort: {createdAt: -1}});
+      } else {
+        // Otherwise, return all of the tasks
+        return Tasks.find({type: "meeting"}, {sort: {createdAt: -1}});
+      }
+    },
+    chats: function () {
+      if (Session.get("hideCompleted")) {
+        // If hide completed is checked, filter tasks
+        return Tasks.find({type: "chat"}, {checked: {$ne: true}}, {sort: {createdAt: -1}});
+      } else {
+        // Otherwise, return all of the tasks
+        return Tasks.find({type: "chat"}, {sort: {createdAt: -1}});
+      }
+    },
+    hideCompleted: function () {
+      return Session.get("hideCompleted");
+    },
+    emailCount: function () {
+      return Tasks.find({type: "email"}).count();//{checked: {$ne: true}}).count();
+    },
+    meetingsCount: function () {
+      return Tasks.find({type: "meeting"}).count();//{checked: {$ne: true}}).count();
+    },
+    chatCount: function () {
+      return Tasks.find({type: "chat"}).count();//{checked: {$ne: true}}).count();
     }
   });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
+  Template.body.events({
+    "submit .new-email": function (event) {
+      // This function is called when the new task form is submitted
+      var text = event.target.emailText.value;
+
+      Meteor.call("addTask", text, "email");
+
+      // Clear form
+      event.target.emailText.value = "";
+
+      // Prevent default form submit
+      return false;
+    },
+    "submit .new-meeting": function (event) {
+      // This function is called when the new task form is submitted
+      var text = event.target.meetingText.value;
+
+      Meteor.call("addTask", text, "meeting");
+
+      // Clear form
+      event.target.meetingText.value = "";
+
+      // Prevent default form submit
+      return false;
+    },
+    "submit .new-chat": function (event) {
+      // This function is called when the new task form is submitted
+      var text = event.target.chatText.value;
+
+      Meteor.call("addTask", text, "chat");
+
+      // Clear form
+      event.target.chatText.value = "";
+
+      // Prevent default form submit
+      return false;
+    },
+    "change .hide-completed input": function (event) {
+      Session.set("hideCompleted", event.target.checked);
     }
   });
 
+  Template.task.events({
+    "click .toggle-checked": function () {
+      // Set the checked property to the opposite of its current value
+      Meteor.call("setChecked", this._id, ! this.checked);
+    },
+    "click .delete": function () {
+      Meteor.call("deleteTask", this._id);
+    },
+    "click .toggle-private": function () {
+      Meteor.call("setPrivate", this._id, ! this.private);
+    }
+  });
+
+  Template.task.helpers({
+    isOwner: function () {
+      return this.owner === Meteor.userId();
+    }
+  }); */
+
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 }
+
+Meteor.methods({
+  addTask: function (text, type) {
+    // Make sure the user is logged in before inserting a task
+    if (! Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Tasks.insert({
+      type: type,
+      text: text,
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username
+    });
+  },
+  deleteTask: function (taskId) {
+    var task = Tasks.findOne(taskId);
+    if (task.private && task.owner !== Meteor.userId()) {
+      // If the task is private, make sure only the owner can delete it
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Tasks.remove(taskId);
+  },
+  setChecked: function (taskId, setChecked) {
+    var task = Tasks.findOne(taskId);
+    if (task.private && task.owner !== Meteor.userId()) {
+      // If the task is private, make sure only the owner can check it off
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Tasks.update(taskId, { $set: { checked: setChecked} });
+  },
+  setPrivate: function (taskId, setToPrivate) {
+    var task = Tasks.findOne(taskId);
+
+    // Make sure only the task owner can make a task private
+    if (task.owner !== Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+
+    Tasks.update(taskId, { $set: { private: setToPrivate } });
+  }
+});
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+   /*
+  // Only publish tasks that are public or belong to the current user
+  Meteor.publish("emails", function () {
+    return Tasks.find(
+      // {type: "email"},
+      {$or: [
+        { private: {$ne: true} },
+        { owner: this.userId }
+      ]}
+    );
   });
+
+  Meteor.publish("meetings", function () {
+    return Tasks.find(
+      {type: "meeting"},
+      {$or: [
+        { private: {$ne: true} },
+        { owner: this.userId }
+      ]}
+    );
+  });
+
+  Meteor.publish("chats", function () {
+    return Tasks.find(
+      {type: "chat"},
+      {$or: [
+        { private: {$ne: true} },
+        { owner: this.userId }
+      ]}
+    );
+  });
+
+*/
+
 }
+
+
+
+
+
+
 

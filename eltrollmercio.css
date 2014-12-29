@@ -25,6 +25,9 @@
 	margin-right: auto;
 }
 
+#login-dropdown-list {
+	border-radius: 0px;
+}
 /* ESTRUCTURA GENERAL
 ========================================================================== */
 /* CALENDARIO */
