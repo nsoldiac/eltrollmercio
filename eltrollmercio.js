@@ -1,16 +1,34 @@
 Titulares = new Mongo.Collection("titulares");
+Mosaicos = new Mongo.Collection("mosaicos");
 
 if (Meteor.isClient) {
   // This code only runs on the client
   
   Meteor.subscribe("titulares-prueba");
+  Meteor.subscribe("mosaicos-prueba");
   
   Template.body.helpers({
     titularesPrueba: function () {
       return Titulares.find({idNoticia: "noticia1"}, {sort: {votos: -1, createdAt: -1}}); 
     },
+    items: function () {
+      return Mosaicos.find({}, {sort: {votos: -1, createdAt: -1}}); 
+    },
     cuantosTitulares: function () {
       return Titulares.find({idNoticia: "noticia1"}).count();//{checked: {$ne: true}}).count();
+    }, 
+    puntosUsuario: function() {
+      var result = Titulares.aggregate( [
+        {
+          $group: {
+            _id: null,
+            total: {$sum: "$votos"}
+          }
+        }
+      ] );
+
+      console.log(result.votos);
+      return result;
     }
   });
 
@@ -97,15 +115,15 @@ Meteor.methods({
 
   disminuirVoto: function (id) {
     var noticia = Titulares.findOne({_id: id});
-    var masVotos = noticia.votos;
-    if (masVotos > 0) {
-      masVotos -= 1;
-      // console.log("Votos: "+masVotos)
+    var menosVotos = noticia.votos;
+    if (menosVotos > 0) {
+      menosVotos -= 1;
+      // console.log("Votos: "+menosVotos)
 
       Titulares.update(
         {_id: id}, 
         {
-          $set: {votos : masVotos}
+          $set: {votos : menosVotos}
         }
       );
     }
@@ -126,20 +144,27 @@ if (Meteor.isServer) {
     );
   });
 
-  /*
-  Meteor.publish("emails", function () {
-    return Titulares.find(
-      // {type: "email"},
-      {$or: [
-        { private: {$ne: true} },
-        { owner: this.userId }
-      ]}
-    );
+   Meteor.publish("mosaicos-prueba", function () {
+    return Mosaicos.find();
   });
-*/
 
 }
 
+
+// db.mosaicos.insert(
+//   {
+//   "idNoticia" : "noticia1",
+//   "titular" : "Primera prueba con haaaartos caracteres",
+//   "texto": "La animaci&oacute;n de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas",
+//   "categoria" : "Redes Sociales",
+//   "nombreImagen": "01.jpg",
+//   "positionTop": 7,
+//   "positionLeft": 15,
+//   "height": 99,
+//   "width": 176,
+//   "class": "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting",
+//   "createdAt" : ISODate("2014-12-30T17:48:42.760Z"),
+// })
 
 
 
