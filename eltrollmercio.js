@@ -85,7 +85,7 @@ Meteor.methods({
     var noticia = Titulares.findOne({_id: id});
     var masVotos = noticia.votos;
     masVotos += 1;
-    console.log("Votos: "+masVotos)
+    // console.log("Votos: "+masVotos)
 
     Titulares.update(
       {_id: id}, 
@@ -100,7 +100,7 @@ Meteor.methods({
     var masVotos = noticia.votos;
     if (masVotos > 0) {
       masVotos -= 1;
-      console.log("Votos: "+masVotos)
+      // console.log("Votos: "+masVotos)
 
       Titulares.update(
         {_id: id}, 

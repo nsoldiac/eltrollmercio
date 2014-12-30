@@ -148,10 +148,9 @@ table td.expand {
 div.upvote {
 	/*upvote simbol - upwards pointing triangle*/
 	float: right;
-	width: 10px;
 	border-bottom: solid 10px black;
-	border-left: solid 10px #eee;
-	border-right: solid 10px #eee;
+	border-left: solid 7px #eee;
+	border-right: solid 7px #eee;
 	margin:3px;
 	cursor: pointer;
 }
@@ -159,16 +158,22 @@ div.upvote {
 div.downvote {
 	/*downvote simbol - downward pointing triangle*/
 	float: right;
-	width: 10px;
 	border-top: solid 10px black;
-	border-left: solid 10px #eee;
-	border-right: solid 10px #eee;
+	border-left: solid 7px #eee;
+	border-right: solid 7px #eee;
 	margin:3px;
 	cursor: pointer;
 }
 
-td.votos>span {
-	float: center;
+.votitos {
+	/*float: center;*/
+	margin-top: 7px;
+}
+
+.dosVotos {
+	width: 25px;
+	float: right;
+	vertical-align: center;
 }
 
 button.borrar {
