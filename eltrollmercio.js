@@ -7,7 +7,7 @@ if (Meteor.isClient) {
   
   Template.body.helpers({
     titularesPrueba: function () {
-      return Titulares.find(); //{idNoticia: "noticia1"}, {sort: {createdAt: -1}}); 
+      return Titulares.find({idNoticia: "noticia1"}, {sort: {votos: -1, createdAt: -1}}); 
     },
     cuantosTitulares: function () {
       return Titulares.find({idNoticia: "noticia1"}).count();//{checked: {$ne: true}}).count();
@@ -35,8 +35,6 @@ if (Meteor.isClient) {
       Meteor.call("eliminarTitular", this._id);
     },
     "click .upvote": function () {
-      console.log("Yay1");
-      console.log(this._id);
       Meteor.call("aumentarVoto", this._id);
     },
     "click .downvote": function () {
@@ -95,6 +93,22 @@ Meteor.methods({
         $set: {votos : masVotos}
       }
     );
+  },
+
+  disminuirVoto: function (id) {
+    var noticia = Titulares.findOne({_id: id});
+    var masVotos = noticia.votos;
+    if (masVotos > 0) {
+      masVotos -= 1;
+      console.log("Votos: "+masVotos)
+
+      Titulares.update(
+        {_id: id}, 
+        {
+          $set: {votos : masVotos}
+        }
+      );
+    }
   }
   
 });
