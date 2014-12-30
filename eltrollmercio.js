@@ -81,7 +81,7 @@ if (Meteor.isServer) {
   // Only publish tasks that are public or belong to the current user
   Meteor.publish("titulares", function () {
     return Titulares.find(
-      //
+      {idNoticia: "noticia1"}
     );
   });
 

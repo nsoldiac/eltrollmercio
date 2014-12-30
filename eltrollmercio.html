@@ -7,20 +7,28 @@
 	<div class="voting-container">
 		<div class="noticiaOriginal">
 			<div class="fotoNoticia"><img src="/i/03.jpg" alt="Imagen Original"></div>
-			<div class="titularOriginal">Mujeres pelean por regalos que peatones dieron a niños</div>
-			<div class="notaOriginal"><p>Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles C&aacute;diz y Marconi, en San Isidro</p></div>
+			<div class="titularOriginal">
+				<span>POST ORIGINAL:</span>
+				<h2> Mujeres pelean por regalos que peatones dieron a niños</h2>
+				<p>Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles C&aacute;diz y Marconi, en San Isidro</p>
+			</div>
 		</div>
 		<div>
 			<form class="nuevo-titular">
-				<input name="textoNuevoTitular" placeholder="Tu titular alternativo...">
+				<input name="textoNuevoTitular" maxlength="54" placeholder="Tu titular alternativo aqui...">
 			</form>
 		</div>
 		<table class="titularesAlternativos">
-			<th>
-				<td>Votos</td>
-				<td>Titulares Alternativos</td>
-				<td>X</td>
-			</th>
+			<tr>
+				<th class="shrink">VOTOS</th>
+				<th class="expand titular">TITULARES ALTERNATIVOS</th>
+				<th class="shrink"></th>
+			</tr>
+			<tr>
+				<td class="shrink">12</td>
+				<td class="expand titular">"Señoras hacen pachamanca entre avenidas de San Isidro"<br><i>nsoldiac</i></td>
+				<td class="shrink">&times;</td>
+			</tr>
 			{{#each titulares}}
 				{{>comments}}
 			{{/each}}
@@ -447,7 +455,7 @@
   <tr>
   	<!-- <td><div class="votes">{{votos}}</div></td> -->
   	<td></td>
-  	<td>{{titular}}<br><span id="usuario-comment">{{usuario}}</span></td>
+  	<td>{{titular}}<br><span id="usuario-comment"><i>{{usuario}}</i></span></td>
   	<button class="delete">&times;</button>
   </tr>
 </template>
