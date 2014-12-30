@@ -35,6 +35,8 @@ if (Meteor.isClient) {
       Meteor.call("eliminarTitular", this._id);
     },
     "click .upvote": function () {
+      console.log("Yay1");
+      console.log(this._id);
       Meteor.call("aumentarVoto", this._id);
     },
     "click .downvote": function () {
@@ -82,14 +84,17 @@ Meteor.methods({
   },
 
   aumentarVoto: function (id) {
+    var noticia = Titulares.findOne({_id: id});
+    var masVotos = noticia.votos;
+    masVotos += 1;
+    console.log("Votos: "+masVotos)
+
     Titulares.update(
-      {_id: id},
+      {_id: id}, 
       {
-        $set: {
-        number : { $sum : 1 }
-        }
+        $set: {votos : masVotos}
       }
-    )
+    );
   }
   
 });
