@@ -5,7 +5,26 @@
 <body>
 	<div id="back-cover"></div>
 	<div class="voting-container">
-		<!-- {{{}}} -->
+		<div class="noticiaOriginal">
+			<div class="fotoNoticia"><img src="/i/03.jpg" alt="Imagen Original"></div>
+			<div class="titularOriginal">Mujeres pelean por regalos que peatones dieron a niños</div>
+			<div class="notaOriginal"><p>Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles C&aacute;diz y Marconi, en San Isidro</p></div>
+		</div>
+		<div>
+			<form class="nuevo-titular">
+				<input name="textoNuevoTitular" placeholder="Tu titular alternativo...">
+			</form>
+		</div>
+		<table class="titularesAlternativos">
+			<th>
+				<td>Votos</td>
+				<td>Titulares Alternativos</td>
+				<td>X</td>
+			</th>
+			{{#each titulares}}
+				{{>comments}}
+			{{/each}}
+		</table>
 	</div>
  
  	<main id="wrapper">
@@ -27,7 +46,7 @@
 		
 		
 		<div class="ec-apertura">
-			<!--links toma de canal-->
+
 		    <div class="ads-980x180 tc-banner-top popup-voting" id="banner-top">
 				<img src="/i/publicidad2.gif" alt="Publicidad">
     		</div>
@@ -424,7 +443,11 @@
 
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="comments">
+  <tr>
+  	<!-- <td><div class="votes">{{votos}}</div></td> -->
+  	<td></td>
+  	<td>{{titular}}<br><span id="usuario-comment">{{usuario}}</span></td>
+  	<button class="delete">&times;</button>
+  </tr>
 </template>
