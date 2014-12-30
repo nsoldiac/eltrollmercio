@@ -24,6 +24,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	/*padding:20px;*/
+	overflow: scroll;
 }
 
 #login-dropdown-list {
@@ -38,27 +39,46 @@ form.nuevo-titular {
 }
 
 table.titularesAlternativos {
-	width: 95%;
-	margin-left: 10px;
-	margin-right: 10px;
+	width: 100%;
+/*	margin-left: 10px;
+	margin-right: 10px;*/
 }
 
 table.titularesAlternativos th {
-	border-bottom: dotted 1px gray;
+	border-bottom: solid 1px gray;
 	/*position: fixed;*/
 }
 
-tr {
+tr.listaTitulares {
 	margin: 10px 0px 10px 0px;
+	border-top: dotted 1px gray;
 }
 
 th {
-	font: 18px 'prelobold'; 
+	font: 18px 'prelobold';
+	border-top: none; 
+	text-align: left;
+	padding-left: 10px;
 }
 
-td {
+td.votos {
 	padding: 10px;
 	vertical-align: top;
+	/*border: dotted 1px gray;*/
+	text-align: center;
+}
+
+.titularAlternativo {
+	padding: 10px 10px 10px 40px;
+	vertical-align: top;
+	/*border: dotted 1px gray;*/
+}
+
+td.eliminar {
+	padding: 10px;
+	vertical-align: top;
+	/*border: dotted 1px gray;*/
+	text-align: center;
 }
 
 table td.shrink {
@@ -72,11 +92,10 @@ table td.expand {
 }
 
 .nuevo-titular input {
-	/*margin-bottom: 20px;*/
 	width: 100%;
 	height: 40px;
 	padding: 6px;
-	font: 22px/110% 'glosabold'; 
+	font: 20px/110% 'Arial'; 
 	vertical-align: center;
 }
 
@@ -84,7 +103,7 @@ table td.expand {
 	width: 100%;
 	margin: 0px;
 	background-color: #363533; 
-	overflow: hidden;
+	overflow: scroll;
 }
 
 .fotoNoticia {
@@ -126,12 +145,38 @@ table td.expand {
 	padding: 0 7px 0 7px;
 }
 
-div.votes:before {
+div.upvote {
 	/*upvote simbol - upwards pointing triangle*/
+	float: right;
+	width: 10px;
+	border-bottom: solid 10px black;
+	border-left: solid 10px #eee;
+	border-right: solid 10px #eee;
+	margin:3px;
+	cursor: pointer;
 }
 
-div.votes:after {
+div.downvote {
 	/*downvote simbol - downward pointing triangle*/
+	float: right;
+	width: 10px;
+	border-top: solid 10px black;
+	border-left: solid 10px #eee;
+	border-right: solid 10px #eee;
+	margin:3px;
+	cursor: pointer;
+}
+
+td.votos>span {
+	float: center;
+}
+
+button.borrar {
+	border: 0;
+	background-color: #eee;
+	width: 18px;
+	height: 18px;
+	border-color: none;
 }
 
 /* ESTRUCTURA GENERAL

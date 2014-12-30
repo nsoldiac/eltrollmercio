@@ -3,14 +3,14 @@ Titulares = new Mongo.Collection("titulares");
 if (Meteor.isClient) {
   // This code only runs on the client
   
-  Meteor.subscribe("titulares");
+  Meteor.subscribe("titulares-prueba");
   
   Template.body.helpers({
-    comments: function () {
-      return Titulares.find({type: "noticia1"}, {sort: {createdAt: -1}}); 
+    titularesPrueba: function () {
+      return Titulares.find(); //{idNoticia: "noticia1"}, {sort: {createdAt: -1}}); 
     },
     cuantosTitulares: function () {
-      return Titulares.find({type: "noticia1"}).count();//{checked: {$ne: true}}).count();
+      return Titulares.find({idNoticia: "noticia1"}).count();//{checked: {$ne: true}}).count();
     }
   });
 
@@ -33,6 +33,12 @@ if (Meteor.isClient) {
   Template.comments.events({
     "click .borrar": function () {
       Meteor.call("eliminarTitular", this._id);
+    },
+    "click .upvote": function () {
+      Meteor.call("aumentarVoto", this._id);
+    },
+    "click .downvote": function () {
+      Meteor.call("disminuirVoto", this._id);
     }
   });
 
@@ -58,20 +64,32 @@ Meteor.methods({
     Titulares.insert({
       idNoticia: noticia,
       titular: texto,
+      votos: 0,
       createdAt: new Date(),
       owner: Meteor.userId(),
       usuario: Meteor.user().username
     });
   },
 
-  eliminarTitular: function (taskId) {
-    var task = Titulares.findOne(taskId);
+  eliminarTitular: function (idTitular) {
+    var noticia = Titulares.findOne(idTitular);
     if (Meteor.userId() ==! 'nsoldiac') { //task.private && task.owner !== 
       // If the task is private, make sure only the owner can delete it
       throw new Meteor.Error("not-authorized");
     }
 
-    Titulares.remove(taskId);
+    Titulares.remove(noticia);
+  },
+
+  aumentarVoto: function (id) {
+    Titulares.update(
+      {_id: id},
+      {
+        $set: {
+        number : { $sum : 1 }
+        }
+      }
+    )
   }
   
 });
@@ -79,9 +97,13 @@ Meteor.methods({
 if (Meteor.isServer) {
 
   // Only publish tasks that are public or belong to the current user
-  Meteor.publish("titulares", function () {
+  Meteor.publish("titulares-prueba", function () {
     return Titulares.find(
-      {idNoticia: "noticia1"}
+      {idNoticia: "noticia1"},
+      {$or: [
+        { private: {$ne: true} },
+        { owner: this.userId }
+      ]}
     );
   });
 

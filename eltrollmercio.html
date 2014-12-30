@@ -15,22 +15,17 @@
 		</div>
 		<div>
 			<form class="nuevo-titular">
-				<input name="textoNuevoTitular" maxlength="54" placeholder="Tu titular alternativo aqui...">
+				<input name="textoNuevoTitular" maxlength="54" placeholder="Tu titular alternativo aqui... (hasta 54 caracteres)">
 			</form>
 		</div>
 		<table class="titularesAlternativos">
 			<tr>
-				<th class="shrink">VOTOS</th>
-				<th class="expand titular">TITULARES ALTERNATIVOS</th>
+				<th class="shrink" style="text-align: center;">VOTOS</th>
+				<th class="expand titularAlternativo">TITULARES ALTERNATIVOS ({{cuantosTitulares}})</th>
 				<th class="shrink"></th>
 			</tr>
-			<tr>
-				<td class="shrink">12</td>
-				<td class="expand titular">"Señoras hacen pachamanca entre avenidas de San Isidro"<br><i>nsoldiac</i></td>
-				<td class="shrink">&times;</td>
-			</tr>
-			{{#each titulares}}
-				{{>comments}}
+			{{#each titularesPrueba}}
+				{{> comments}}
 			{{/each}}
 		</table>
 	</div>
@@ -433,7 +428,9 @@
 </div>		
 
 </main>
+
 <script >
+
 	$('.popup-voting').click(function() {
 	  var h = $(document).height();
 	  $('#back-cover').toggle();
@@ -446,16 +443,23 @@
 		$('.voting-container').toggle();
 	});
 
-
 </script>
 
 </body>
 
 <template name="comments">
-  <tr>
+  <tr class="listaTitulares">
   	<!-- <td><div class="votes">{{votos}}</div></td> -->
-  	<td></td>
-  	<td>{{titular}}<br><span id="usuario-comment"><i>{{usuario}}</i></span></td>
-  	<button class="delete">&times;</button>
+  	<td class="votos">
+  		<div class="dosVotos">
+  			<div class="upvote"></div>
+  			<div class="downvote"></div>
+  		</div>
+  		<span>{{votos}}</span>
+  	</td>
+  	<td class="titularAlternativo">"{{titular}}"<br><span id="usuario-comment"><i>por: {{usuario}}</i></span></td>
+  	<td class="eliminar">
+  		<button class="borrar">&times;</button>
+  	</td>
   </tr>
 </template>
