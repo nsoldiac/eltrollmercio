@@ -44,6 +44,10 @@ if (Meteor.isClient) {
 
       // Prevent default form submit
       return false;
+    },
+
+    "click .agregar-data": function () {
+      Meteor.call("insertNoticias");
     }
 
   });
@@ -149,6 +153,14 @@ Meteor.methods({
     var imagen = record.nombreImagen;
 
     // Code to render the variables above into the voting popup window
+  },
+
+  insertNoticias: function () {
+    var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "01.jpg", "positionLeft" : 15, "positionTop" : 7, "texto" : "La animaci&oacute;n de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
+    var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "02.jpg", "positionTop" : 7, "positionLeft" : 205, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+
+    Mosaicos.insert(Document1);
+    Mosaicos.insert(Document2);
   }
   
 });
