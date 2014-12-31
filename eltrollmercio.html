@@ -149,11 +149,8 @@
 </article> -->
 
 
-{{#each items}}
-	{{> mosaico}}
-{{/each}}
 															
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting"  style="position: absolute; top: 7px; left: 205px;">									
+<!-- <article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting"  style="position: absolute; top: 7px; left: 205px;">									
 	<figure class="bi3dArtId-1780954 bi3dArtType-photo">
 		<figcaption>
 			<h2>
@@ -162,13 +159,17 @@
 			<h3>
 				<span>Redes Sociales</span>
 			</h3>			
-		  	<p>Cada fin de a&ntilde;o, es tradici&oacute;n repasar los momentos vividos. Sin embargo, &iquest;es necesario que Facebook lo publique?</p>
+		  	<p>Cada fin de año, es tradició;n repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?</p>
 		</figcaption>
 		<span>
 			<img src="/i/02.jpg" alt="Facebook: no todos quieren recordar su a&ntilde;o en la red social" width="176" height="99">
 		</span>			
 	</figure>					
-</article>
+</article> -->
+
+{{#each items}}
+	{{> mosaico}}
+{{/each}}
 															
 <article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting"  style="position: absolute; top: 7px; left: 395px;">									
 	<figure class="bi3dArtId-1780921 bi3dArtType-photo">
@@ -408,6 +409,9 @@
 
 
 <div class="voting-container">
+
+	{{> votaciones}}
+
 	<div class="noticiaOriginal">
 		<div class="fotoNoticia"><img src="/i/03.jpg" alt="Imagen Original"></div>
 		<div class="titularOriginal">
@@ -455,7 +459,6 @@
 
 <template name="comments">
   <tr class="listaTitulares">
-  	<!-- <td><div class="votes">{{votos}}</div></td> -->
   	<td class="votos">
   		<div class="dosVotos">
   			<img class="upvote" src="/i/upvote.png" alt="">
@@ -474,7 +477,7 @@
 </template>
 
 <template name="mosaico">
-	<article class="{{class}}" style="position: absolute; top: {{positionTop}}px; left: {{positionTop}}px;">
+	<article class="{{class}}" style="position: absolute; top: {{positionTop}}px; left: {{positionLeft}}px;">
 		<figure class="">
 			<figcaption>
 				<h2>
@@ -490,4 +493,15 @@
 			</div>	
 		</figure>			
 	</article>
+</template>
+
+<template name="votaciones">
+	<div class="noticiaOriginal">
+		<div class="fotoNoticia"><img src="/i/{{nombreImagen}}" alt="Imagen Original"></div>
+		<div class="titularOriginal">
+			<span>POST ORIGINAL:</span>
+			<h2>{{titulo}}</h2>
+			<p>{{texto}}</p>
+		</div>
+	</div>
 </template>

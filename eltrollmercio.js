@@ -48,6 +48,17 @@ if (Meteor.isClient) {
 
   });
 
+  Template.mosaico.events({
+    "click .popup-voting": function () {
+      Meteor.call("renderVotingTemplate", this._id);
+
+      var h = $(document).height();
+      $('#back-cover').toggle();
+      $('.voting-container').toggle();
+      $('#back-cover').css("height",h);
+    }
+  });
+
   Template.comments.events({
     "click .borrar": function () {
       Meteor.call("eliminarTitular", this._id);
@@ -127,6 +138,17 @@ Meteor.methods({
         }
       );
     }
+  },
+
+  renderVotingTemplate: function (noticia) {
+    var record = Mosaicos.findOne({
+      {_id, noticia}
+    });
+    var titulo = record.titular,
+        texto = record.texto,
+        imagen = record.nombreImagen
+
+    // Code to render the variables above into the voting popup window
   }
   
 });
@@ -136,11 +158,7 @@ if (Meteor.isServer) {
   // Only publish tasks that are public or belong to the current user
   Meteor.publish("titulares-prueba", function () {
     return Titulares.find(
-      {idNoticia: "noticia1"},
-      {$or: [
-        { private: {$ne: true} },
-        { owner: this.userId }
-      ]}
+      // {idNoticia: "noticia1"}
     );
   });
 
@@ -153,17 +171,17 @@ if (Meteor.isServer) {
 
 // db.mosaicos.insert(
 //   {
-//   "idNoticia" : "noticia1",
-//   "titular" : "Primera prueba con haaaartos caracteres",
-//   "texto": "La animaci&oacute;n de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas",
+//   "idNoticia" : "noticia2",
+//   "titular" : "Facebook: no todos quieren recordar su año en la red social",
+//   "texto": "Cada fin de año, es tradició;n repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?",
 //   "categoria" : "Redes Sociales",
-//   "nombreImagen": "01.jpg",
+//   "nombreImagen": "02.jpg",
 //   "positionTop": 7,
-//   "positionLeft": 15,
+//   "positionLeft": 205,
 //   "height": 99,
 //   "width": 176,
 //   "class": "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting",
-//   "createdAt" : ISODate("2014-12-30T17:48:42.760Z"),
+//   "createdAt" : new Date()
 // })
 
 
