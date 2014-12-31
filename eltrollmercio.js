@@ -142,11 +142,11 @@ Meteor.methods({
 
   renderVotingTemplate: function (noticia) {
     var record = Mosaicos.findOne({
-      {_id, noticia}
+      _id: noticia
     });
-    var titulo = record.titular,
-        texto = record.texto,
-        imagen = record.nombreImagen
+    var titulo = record.titular;
+    var texto = record.texto;
+    var imagen = record.nombreImagen;
 
     // Code to render the variables above into the voting popup window
   }
