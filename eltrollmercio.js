@@ -23,7 +23,7 @@ if (Meteor.isClient) {
           $group: {
             _id: null,
             total: {$sum: "$votos"}
-          }
+          } 
         }
       ] );
 
@@ -152,15 +152,28 @@ Meteor.methods({
     var texto = record.texto;
     var imagen = record.nombreImagen;
 
+    $('.titularOriginal>h2').html(titulo);
+    $('.titularOriginal>p').html(texto);
+    $('.fotoNoticia>img').attr('src','/i/'+imagen);
+
     // Code to render the variables above into the voting popup window
   },
 
   insertNoticias: function () {
+    Mosaicos.remove();
+
     var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "01.jpg", "positionLeft" : 15, "positionTop" : 7, "texto" : "La animaci&oacute;n de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
     var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "02.jpg", "positionTop" : 7, "positionLeft" : 205, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document3 = { "idNoticia" : "noticia3", "titular" : "Mujeres pelean por regalos que peatones dieron a niños", "texto" : "Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles Cádiz y Marconi, en San Isidro", "categoria" : "Lima", "nombreImagen" : "03.jpg", "positionTop" : 7, "positionLeft" : 395, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document4 = { "idNoticia" : "noticia4", "titular" : '"Cuatro pasos para salir de pulpín", por Eduardo Morón', "texto" : "Las empresas no buscan trabajadores, sino talento, y cuando lo encuentran esán dispuestos a pagar por retenerlo, dice Morán", "categoria" : "Economía", "nombreImagen" : "04.jpg", "positionTop" : 7, "positionLeft" : 585, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document5 = { "idNoticia" : "noticia5", "titular" : "Editorial: De maduro a rancio", "texto" : "Una vez más, el chavismo consolidó su control en las distintas instituciones del Estado.", "categoria" : "Opinión", "nombreImagen" : "05.jpg", "positionTop" : 7, "positionLeft" : 775, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    
 
     Mosaicos.insert(Document1);
     Mosaicos.insert(Document2);
+    Mosaicos.insert(Document3);
+    Mosaicos.insert(Document4);
+    Mosaicos.insert(Document5);
   }
   
 });
