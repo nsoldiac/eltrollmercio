@@ -167,13 +167,17 @@ Meteor.methods({
     var Document3 = { "idNoticia" : "noticia3", "titular" : "Mujeres pelean por regalos que peatones dieron a niños", "texto" : "Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles Cádiz y Marconi, en San Isidro", "categoria" : "Lima", "nombreImagen" : "03.jpg", "positionTop" : 7, "positionLeft" : 395, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
     var Document4 = { "idNoticia" : "noticia4", "titular" : '"Cuatro pasos para salir de pulpín", por Eduardo Morón', "texto" : "Las empresas no buscan trabajadores, sino talento, y cuando lo encuentran esán dispuestos a pagar por retenerlo, dice Morán", "categoria" : "Economía", "nombreImagen" : "04.jpg", "positionTop" : 7, "positionLeft" : 585, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
     var Document5 = { "idNoticia" : "noticia5", "titular" : "Editorial: De maduro a rancio", "texto" : "Una vez más, el chavismo consolidó su control en las distintas instituciones del Estado.", "categoria" : "Opinión", "nombreImagen" : "05.jpg", "positionTop" : 7, "positionLeft" : 775, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    
+    var Document6 = { "idNoticia" : "noticia6", "titular" : "Hay más venta de viviendas en Lima norte pese a contracción", "texto" : "Comas, Carabayllo y SMP sintieron la retracción pero tuvieron mejor ritmo debido a los proyectos multifamiliares. <strong>►<span>Vender o alquilar un inmueble: Cuándo es conveniente hacerlo?</span>&nbsp;►►<span>Piensas comprar una vivienda? Descubre lo que más te conviene</strong></span>", "categoria" : "Economía", "nombreImagen" : "06.jpg", "positionTop" : 197, "positionLeft" : 15, "height" : 404, "width" : 556, "class" : "ui-box ui-box3x3 ui-modtop2 ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document7 = { "idNoticia" : "noticia7", "titular" : "Diego Forlán: Chemo me llamó, pero no hay nada con la 'U'", "texto" : "strong>Diego Forlán</strong> confirmó que tiene contrato en Japón, con lo que descartó posible llegada a <strong>Universitario de Deportes</strong>", "categoria" : "Deporte Total", "nombreImagen" : "07.jpg", "positionTop" : 775, "positionLeft" : 15, "height" : 205, "width" : 336, "class" : "ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+   
 
     Mosaicos.insert(Document1);
     Mosaicos.insert(Document2);
     Mosaicos.insert(Document3);
     Mosaicos.insert(Document4);
     Mosaicos.insert(Document5);
+    Mosaicos.insert(Document6);
+    Mosaicos.insert(Document7);
   }
   
 });
@@ -208,6 +212,25 @@ if (Meteor.isServer) {
 //   "class": "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting",
 //   "createdAt" : new Date()
 // })
+
+
+// db.mosaicos.insert(
+//   {
+//   "idNoticia" : "noticia6",
+//   "titular" : "Facebook: no todos quieren recordar su año en la red social",
+//   "texto": "Cada fin de año, es tradició;n repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?",
+//   "categoria" : "Redes Sociales",
+//   "nombreImagen": "02.jpg",
+//   "positionTop": 7,
+//   "positionLeft": 205,
+//   "height": 99,
+//   "width": 176,
+//   "class": "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting",
+//   "createdAt" : new Date()
+// })
+
+
+
 
 
 
