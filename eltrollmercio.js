@@ -55,6 +55,11 @@ if (Meteor.isClient) {
   Template.mosaico.events({
     "click .popup-voting": function () {
       Meteor.call("renderVotingTemplate", this._id);
+      // Meteor.call("getTitular", this._id);
+
+      Session.set("idNoticia", this._id);
+
+      // console.log(Session.get("idNoticia"));
 
       var h = $(document).height();
       $('#back-cover').toggle();
@@ -85,6 +90,19 @@ if (Meteor.isClient) {
     passwordSignupFields: "USERNAME_ONLY"
   });
 }
+
+// Template.votaciones.helpers({
+//   getNombreImagen: function () {
+//     // ...
+//   },
+//   getTexto: function () {
+//     // ...
+//   },
+//   getTitular: function () {
+//     // ...
+//   }
+
+// });
 
 
 Meteor.methods({
@@ -152,11 +170,11 @@ Meteor.methods({
     var texto = record.texto;
     var imagen = record.nombreImagen;
 
-    $('.titularOriginal>h2').html(titulo);
-    $('.titularOriginal>p').html(texto);
-    $('.fotoNoticia>img').attr('src','/i/'+imagen);
-
     // Code to render the variables above into the voting popup window
+
+    // $('.titularOriginal>h2').html(titulo);
+    // $('.titularOriginal>p').html(texto);
+    // $('.fotoNoticia>img').attr('src','/i/'+imagen);
   },
 
   insertNoticias: function () {
@@ -178,6 +196,24 @@ Meteor.methods({
     Mosaicos.insert(Document5);
     Mosaicos.insert(Document6);
     Mosaicos.insert(Document7);
+  },
+
+  getNombreImagen: function () {
+    
+  },
+
+  getTexto: function () {
+    // ...
+  },
+
+  getTitular: function () {
+    // var idNoticia = Session.get("idNoticia");
+    console.log(Session.get("idNoticia"));
+
+    // var titular = Mosaicos.findOne({_id: }).titular;
+    // console.log(titular);
+
+    // return titular;
   }
   
 });
@@ -213,21 +249,6 @@ if (Meteor.isServer) {
 //   "createdAt" : new Date()
 // })
 
-
-// db.mosaicos.insert(
-//   {
-//   "idNoticia" : "noticia6",
-//   "titular" : "Facebook: no todos quieren recordar su año en la red social",
-//   "texto": "Cada fin de año, es tradició;n repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?",
-//   "categoria" : "Redes Sociales",
-//   "nombreImagen": "02.jpg",
-//   "positionTop": 7,
-//   "positionLeft": 205,
-//   "height": 99,
-//   "width": 176,
-//   "class": "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting",
-//   "createdAt" : new Date()
-// })
 
 
 

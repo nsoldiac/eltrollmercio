@@ -124,10 +124,10 @@
 			<h3>
 		  		<span>Mundo</span>
 			</h3>		
-			<p>El periodista, Andrew Harding, regres&oacute; a Banda Aceh, en Indonesia, para reencontrarse con una sobreviviente del desastre</p>
+			<p>El periodista, Andrew Harding, regresó a Banda Aceh, en Indonesia, para reencontrarse con una sobreviviente del desastre</p>
 		</figcaption>
 		<span>
-			<img src="/i/08.jpg"  alt="Emotivo reencuentro con una v&iacute;ctima del tsunami 10 a&ntilde;os despu&eacute;s" width="176" height="99">
+			<img src="/i/08.jpg"  alt="Emotivo reencuentro con una víctima del tsunami 10 años después" width="176" height="99">
 		</span>
 	</figure>					
 </article>
@@ -141,10 +141,10 @@
 			<h3>
 			  <span>Política</span>
 			</h3>				
-		   	<p>Si la&nbsp;acci&oacute;n es admitida, el Congreso tendr&aacute; 30 d&iacute;as para responderla. Adem&aacute;s, miembros del TC estar&aacute;n&#8230;</p>
+		   	<p>Si la&nbsp;acci&oacute;n es admitida, el Congreso tendrá 30 días para responderla. Adem&aacute;s, miembros del TC estarán&#8230;</p>
 		</figcaption>
 		<span>
-			<img src="/i/09.jpg"  alt="Ley laboral juvenil: TC analizar&iacute;a demanda en marzo" width="176" height="99">
+			<img src="/i/09.jpg"  alt="Ley laboral juvenil: TC analizaría demanda en marzo" width="176" height="99">
 		</span>
 	</figure>					
 </article>
@@ -161,7 +161,7 @@
 		   	<p>El trabajo informal se presenta casi como una esclavitud.</p>
 		</figcaption>
 		<span>
-			<img src="/i/10.jpg"  alt="Prejuicios sobre el trabajo informal, por Iv&aacute;n Alonso" width="176" height="99">
+			<img src="/i/10.jpg"  alt="Prejuicios sobre el trabajo informal, por Iván Alonso" width="176" height="99">
 		</span>
 	</figure>					
 </article>
@@ -192,13 +192,13 @@
 	   		<h2>
 	      		<span>YouTube: Norman, el perro que odia los villancicos (VIDEO)</span>
 	   		</h2>
-	   		<p>El viral en <span>YouTube</span> podr&iacute;a demostrar que los perros &ldquo;s&iacute; tienen gusto&rdquo; para la m&uacute;sica. &iquest;Qu&eacute; opinas?</p>
+	   		<p>El viral en <span>YouTube</span> podría demostrar que los perros &ldquo;sí tienen gusto para la música. Qué opinas?</p>
 			<h3>
 				<span>Redes Sociales</span>
 			</h3>		
 		</figcaption>
 	    <span>
-	    	<img src="/i/12.jpg"  alt="YouTube: Norman, el perro que odia las canciones navide&ntilde;as" width="366" height="205">
+	    	<img src="/i/12.jpg"  alt="YouTube: Norman, el perro que odia las canciones navideñas" width="366" height="205">
 		</span>
 	   </figure>					
 </article>
@@ -247,50 +247,25 @@
 			<h3>
 			  <span>Redes Sociales</span>
 			</h3>		
-			<p>La impresionante &#39;detonaci&oacute;n de luz&#39; que se vio en el cielo durante las celebraciones fue compartida desde diferentes puntos</p>
+			<p>La impresionante detonación de luz que se vio en el cielo durante las celebraciones fue compartida desde diferentes puntos</p>
 		</figcaption>
 		<span>
-			<img src="/i/15.jpg"  alt="YouTube: fenomeno anormal en plena celebraci&oacute;n de Navidad" width="176" height="99">
+			<img src="/i/15.jpg"  alt="YouTube: fenomeno anormal en plena celebración de Navidad" width="176" height="99">
 		</span>	
 	</figure>					
 </article>
 
-<article class="ui-box ui-box2x3 ui-tipobanner popup-voting"  style="position: absolute; top: 197px; left: 585px;">
+<!-- <article class="ui-box ui-box2x3 ui-tipobanner popup-voting"  style="position: absolute; top: 197px; left: 585px;">
 	<img src="/i/publicidad1.gif" alt="Publicidad">
-</article>
-														
+</article> -->												
 </div>	
-
 </div>		
 
 
 <div class="voting-container">
 
-	<!-- {{>votaciones}} -->
-
-	<div class="noticiaOriginal">
-		<div class="fotoNoticia"><img src="" alt="Imagen Original"></div>
-		<div class="titularOriginal">
-			<span>POST ORIGINAL:</span>
-			<h2></h2>
-			<p></p>
-		</div>
-	</div>
-	<div>
-		<form class="nuevo-titular">
-			<input name="textoNuevoTitular" maxlength="54" placeholder="Tu titular alternativo aqui... (hasta 54 caracteres)">
-		</form>
-	</div>
-	<table class="titularesAlternativos">
-		<tr>
-			<th class="shrink" style="text-align: center;">VOTOS</th>
-			<th class="expand titularAlternativo">TITULARES ALTERNATIVOS ({{cuantosTitulares}})</th>
-			<th class="shrink"></th>
-		</tr>
-		{{#each titularesPrueba}}
-			{{> comments}}
-		{{/each}}
-	</table>
+	{{> votaciones}} 
+	
 </div>
 
 </main>
@@ -333,7 +308,7 @@
 </template>
 
 <template name="mosaico">
-	<article class="{{class}}" style="position: absolute; top: {{positionTop}}px; left: {{positionLeft}}px;">
+	<article class="{{class}}" style="float:left; position:relative"> 
 		<figure class="">
 			<figcaption>
 				<h2>
@@ -341,7 +316,7 @@
 				</h2>
 				<h3>
 			 		<span>{{categoria}}</span>
-				</h3>		
+				</h3>
 			    <p>{{texto}}</p>
 			</figcaption>
 			<div class="img">
@@ -353,11 +328,33 @@
 
 <template name="votaciones">
 	<div class="noticiaOriginal">
-		<div class="fotoNoticia"><img src="/i/{{nombreImagen}}" alt="Imagen Original"></div>
+		<div class="fotoNoticia"><img src="/i/{{getNombreImagen}}" alt="Imagen Original"></div>
 		<div class="titularOriginal">
 			<span>POST ORIGINAL:</span>
-			<h2>{{titulo}}</h2>
-			<p>{{texto}}</p>
+			<h2>{{getTitular}}</h2>
+			<p>{{getTexto}}</p>
 		</div>
 	</div>
+
+	<div>
+		<form class="nuevo-titular">
+			<input name="textoNuevoTitular" maxlength="54" placeholder="Tu titular alternativo aqui... (hasta 54 caracteres)">
+		</form>
+	</div>
+	<table class="titularesAlternativos">
+		<tr>
+			<th class="shrink" style="text-align: center;">VOTOS</th>
+			<th class="expand titularAlternativo">TITULARES ALTERNATIVOS ({{cuantosTitulares}})</th>
+			<th class="shrink"></th>
+		</tr>
+		{{#each titularesPrueba}}
+			{{> comments}}
+		{{/each}}
+	</table>
 </template>
+
+
+
+
+
+
