@@ -116,6 +116,7 @@ table td.expand {
 
 .fotoNoticia>img {
 	width: 100%;
+	margin-top: 3px;
 }
 
 .titularOriginal {
@@ -185,7 +186,6 @@ button.borrar {
 
 .agregar-data>span {
 	width: 100%;
-	height: 100%;
 	cursor: pointer;
 	background-color: #f77500; 
 	background-image: none; 
