@@ -49,15 +49,19 @@ if (Meteor.isClient) {
 
   Template.mosaico.helpers({
     getMasVotado: function (id) {
-      // console.log("test:" + test);
-      // var id = Session.get("idNoticia");
       var doc = Titulares.find({idNoticia: id}, {sort: {votos: -1}, limit: 1});//[0].titular;
       var count = 0;
       var titu = ""
       doc.forEach(function (post) {
         titu = post.titular;
       });
-      return titu;     
+      if (titu) {
+        return titu;       
+      }
+      else {
+        return "Libre para un titular"
+      }
+
     }
   });
 
