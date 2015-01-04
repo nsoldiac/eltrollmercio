@@ -10,7 +10,7 @@ if (Meteor.isClient) {
   Template.body.helpers({
 
     items: function () {
-      return Mosaicos.find({}, {sort: {votos: -1, createdAt: -1}}); 
+      return Mosaicos.find({}, {sort: {createdAt: -1}}); 
     },
     puntosUsuario: function() {
       var result = Titulares.aggregate( [
@@ -21,27 +21,12 @@ if (Meteor.isClient) {
           } 
         }
       ] );
-
-      console.log(result.votos);
-      return result;
+      console.log(result.total);
+      return result.total;
     }
   });
 
-  Template.votaciones.getTitular = function () {
-    var id = Session.get("idNoticia");
-    return Mosaicos.findOne({_id: id}).titular;
-  }
-
-  Template.votaciones.getTexto = function () {
-    var id = Session.get("idNoticia");
-    return Mosaicos.findOne({_id: id}).texto;
-  }
-
-  Template.votaciones.getNombreImagen = function () {
-    var id = Session.get("idNoticia");
-    return Mosaicos.findOne({_id: id}).nombreImagen;
-  }
-
+  
   Template.body.events({
     "click .agregar-data": function () {
       Meteor.call("insertNoticias");
@@ -51,13 +36,28 @@ if (Meteor.isClient) {
 
   Template.mosaico.events({
     "click .popup-voting": function () {
-      // Meteor.call("renderVotingTemplate", this._id);
+      // Meteor.call("getMasVotado", this._id);
       Session.set("idNoticia", this._id);
 
       var h = $(document).height();
       $('#back-cover').toggle();
       $('.voting-container').toggle();
       $('#back-cover').css("height",h);
+    }
+
+  });
+
+  Template.mosaico.helpers({
+    getMasVotado: function (id) {
+      // console.log("test:" + test);
+      // var id = Session.get("idNoticia");
+      var doc = Titulares.find({idNoticia: id}, {sort: {votos: -1}, limit: 1});//[0].titular;
+      var count = 0;
+      var titu = ""
+      doc.forEach(function (post) {
+        titu = post.titular;
+      });
+      return titu;     
     }
   });
 
@@ -100,7 +100,20 @@ if (Meteor.isClient) {
     }, 
     titularesPrueba: function () {
       return Titulares.find({idNoticia: Session.get("idNoticia")}, {sort: {votos: -1, createdAt: -1}}); 
+    }, 
+    getTitular: function () {
+      var id = Session.get("idNoticia");
+      return Mosaicos.findOne({_id: id}).titular;
+    },
+    getTexto: function () {
+      var id = Session.get("idNoticia");
+      return Mosaicos.findOne({_id: id}).texto;
+    },
+    getNombreImagen: function () {
+      var id = Session.get("idNoticia");
+      return Mosaicos.findOne({_id: id}).nombreImagen;
     }
+
   });
 
   Accounts.ui.config({
@@ -166,21 +179,6 @@ Meteor.methods({
     }
   },
 
-  // renderVotingTemplate: function (noticia) {
-  //   var record = Mosaicos.findOne({
-  //     _id: noticia
-  //   });
-  //   var titulo = record.titular;
-  //   var texto = record.texto;
-  //   var imagen = record.nombreImagen;
-
-  //   // Code to render the variables above into the voting popup window
-
-  //   // $('.titularOriginal>h2').html(titulo);
-  //   // $('.titularOriginal>p').html(texto);
-  //   // $('.fotoNoticia>img').attr('src','/i/'+imagen);
-  // },
-
   insertNoticias: function () {
     Mosaicos.remove();
 
@@ -217,20 +215,7 @@ if (Meteor.isServer) {
 }
 
 
-// db.mosaicos.insert(
-//   {
-//   "idNoticia" : "noticia2",
-//   "titular" : "Facebook: no todos quieren recordar su año en la red social",
-//   "texto": "Cada fin de año, es tradició;n repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?",
-//   "categoria" : "Redes Sociales",
-//   "nombreImagen": "02.jpg",
-//   "positionTop": 7,
-//   "positionLeft": 205,
-//   "height": 99,
-//   "width": 176,
-//   "class": "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting",
-//   "createdAt" : new Date()
-// })
+
 
 
 
