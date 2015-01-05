@@ -83,6 +83,10 @@ td.votos {
 	/*border: dotted 1px gray;*/
 }
 
+.titularAlternativo span {
+	font-size: 14px;
+}
+
 td.eliminar {
 	padding: 10px;
 	vertical-align: top;
