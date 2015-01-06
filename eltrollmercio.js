@@ -8,13 +8,51 @@ if (Meteor.isClient) {
   Meteor.subscribe("mosaicos-prueba");
   
   Template.body.helpers({
-
     items: function () {
       return Mosaicos.find({}, {sort: {createdAt: -1}}); 
+    },
+    fecha: function () {
+      var date = new Date();
+      var d = date.getDate();
+      var m = date.getMonth();
+      var y = date.getFullYear();
+
+      var months = new Array();
+      months[0] = "enero";
+      months[1] = "febrero";
+      months[2] = "marzo";
+      months[3] = "abril";
+      months[4] = "mayo";
+      months[5] = "junio";
+      months[6] = "julio";
+      months[7] = "agosto";
+      months[8] = "setiembre";
+      months[9] = "octubre";
+      months[10] = "noviembre";
+      months[11] = "diciembre";
+
+      var todo = d + " de " + months[m] + " del " + y;
+      return todo;
+    },
+    puntos: function (user) {
+      var total = 0;
+      var result = Titulares.find( { owner: Meteor.userId() } );
+      result.forEach(function (doc) {
+        total += doc.votos;
+      });
+
+      return "Puntos: " + total;
+    },
+    desdeCuando: function () {
+      var origin = new Date("2014/12/26");
+      var current = new Date();
+      var total = Number( (current - origin) / 31536000000 );
+      total = Math.round(total * 100) / 100;
+
+      return total;
     }
   });
 
-  
   Template.body.events({
     "click .agregar-data": function () {
       Meteor.call("insertNoticias");
@@ -32,7 +70,6 @@ if (Meteor.isClient) {
       $('.voting-container').toggle();
       $('#back-cover').css("height",h);
     }
-
   });
 
   Template.mosaico.helpers({
@@ -47,7 +84,7 @@ if (Meteor.isClient) {
         return titu;       
       }
       else {
-        return "Libre para un titular"
+        return "[libre para tu titular]"
       }
 
     }
@@ -55,12 +92,28 @@ if (Meteor.isClient) {
 
   Template.comments.events({
     "click .borrar": function () {
+      if (! Meteor.userId()) {
+        window.alert("Si no estas logueado no puedes aportar :(");
+        throw new Meteor.Error("not-authorized");
+      }
+      else if (Meteor.userId() !== this.owner) {
+        window.alert("No puedes borrar posts que no sean tuyos pes causa");
+        throw new Meteor.Error("not-authorized");
+      }
       Meteor.call("eliminarTitular", this._id);
     },
     "click .upvote": function () {
+      if (! Meteor.userId()) {
+        window.alert("Si no estas logueado no puedes aportar :(");
+        throw new Meteor.Error("not-authorized");
+      }
       Meteor.call("aumentarVoto", this._id);
     },
     "click .downvote": function () {
+      if (! Meteor.userId()) {
+        window.alert("Si no estas logueado no puedes aportar :(");
+        throw new Meteor.Error("not-authorized");
+      }
       Meteor.call("disminuirVoto", this._id);
     }
   });
@@ -127,6 +180,7 @@ Meteor.methods({
   addTitular: function (texto, noticia) {
     // Make sure the user is logged in before inserting a task
     if (! Meteor.userId()) {
+      window.alert("Si no estas logueado no puedes aportar :(");
       throw new Meteor.Error("not-authorized");
     }
 
@@ -184,13 +238,13 @@ Meteor.methods({
     
     Mosaicos.remove({});
 
-    var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "01.jpg", "positionLeft" : 15, "positionTop" : 7, "texto" : "La animaci&oacute;n de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
+    var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "01.jpg", "positionLeft" : 15, "positionTop" : 7, "texto" : "La animación de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
     var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "02.jpg", "positionTop" : 7, "positionLeft" : 205, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
     var Document3 = { "idNoticia" : "noticia3", "titular" : "Mujeres pelean por regalos que peatones dieron a niños", "texto" : "Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles Cádiz y Marconi, en San Isidro", "categoria" : "Lima", "nombreImagen" : "03.jpg", "positionTop" : 7, "positionLeft" : 395, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
     var Document4 = { "idNoticia" : "noticia4", "titular" : '"Cuatro pasos para salir de pulpín", por Eduardo Morón', "texto" : "Las empresas no buscan trabajadores, sino talento, y cuando lo encuentran esán dispuestos a pagar por retenerlo, dice Morán", "categoria" : "Economía", "nombreImagen" : "04.jpg", "positionTop" : 7, "positionLeft" : 585, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
     var Document5 = { "idNoticia" : "noticia5", "titular" : "Editorial: De maduro a rancio", "texto" : "Una vez más, el chavismo consolidó su control en las distintas instituciones del Estado.", "categoria" : "Opinión", "nombreImagen" : "05.jpg", "positionTop" : 7, "positionLeft" : 775, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document6 = { "idNoticia" : "noticia6", "titular" : "Hay más venta de viviendas en Lima norte pese a contracción", "texto" : "Comas, Carabayllo y SMP sintieron la retracción pero tuvieron mejor ritmo debido a los proyectos multifamiliares. <strong>►<span>Vender o alquilar un inmueble: Cuándo es conveniente hacerlo?</span>&nbsp;►►<span>Piensas comprar una vivienda? Descubre lo que más te conviene</strong></span>", "categoria" : "Economía", "nombreImagen" : "06.jpg", "positionTop" : 197, "positionLeft" : 15, "height" : 404, "width" : 556, "class" : "ui-box ui-box3x3 ui-modtop2 ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document7 = { "idNoticia" : "noticia7", "titular" : "Diego Forlán: Chemo me llamó, pero no hay nada con la 'U'", "texto" : "strong>Diego Forlán</strong> confirmó que tiene contrato en Japón, con lo que descartó posible llegada a <strong>Universitario de Deportes</strong>", "categoria" : "Deporte Total", "nombreImagen" : "07.jpg", "positionTop" : 775, "positionLeft" : 15, "height" : 205, "width" : 366, "class" : "ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document6 = { "idNoticia" : "noticia6", "titular" : "Hay más venta de viviendas en Lima norte pese a contracción", "texto" : "Comas, Carabayllo y SMP sintieron la retracción pero tuvieron mejor ritmo debido a los proyectos multifamiliares. ►Vender o alquilar un inmueble: Cuándo es conveniente hacerlo? ►► Piensas comprar una vivienda? Descubre lo que más te conviene", "categoria" : "Economía", "nombreImagen" : "06.jpg", "positionTop" : 197, "positionLeft" : 15, "height" : 404, "width" : 556, "class" : "ui-box ui-box3x3 ui-modtop2 ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document7 = { "idNoticia" : "noticia7", "titular" : "Diego Forlán: Chemo me llamó, pero no hay nada con la 'U'", "texto" : "Diego Forlán confirmó que tiene contrato en Japón, con lo que descartó posible llegada a Universitario de Deportes", "categoria" : "Deporte Total", "nombreImagen" : "07.jpg", "positionTop" : 775, "positionLeft" : 15, "height" : 205, "width" : 366, "class" : "ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
    
     Mosaicos.insert(Document1);
     Mosaicos.insert(Document2);
@@ -199,6 +253,7 @@ Meteor.methods({
     Mosaicos.insert(Document5);
     Mosaicos.insert(Document6);
     Mosaicos.insert(Document7);
+   
   }
   
 });
@@ -213,6 +268,38 @@ if (Meteor.isServer) {
    Meteor.publish("mosaicos-prueba", function () {
     return Mosaicos.find();
   });
+
+  // Meteor.methods({
+  //   getMethods: function (obj) {
+  //     var result = [];
+  //     for (var id in obj) {
+  //       try {
+  //         if (typeof(obj[id]) == "function") {
+  //           result.push(id + ": " + obj[id].toString());
+  //         }
+  //       } catch (err) {
+  //         result.push(id + ": inaccessible");
+  //       }
+  //     }
+  //     return result;
+  //   },
+  //   checkYCnews: function () {
+  //     this.unblock();
+  //     try {
+  //       var result = HTTP.call("GET", "http://www.google.com");
+  //       console.log(Meteor.call("getMethods(result)"));
+  //       return true;
+  //     } catch (e) {
+  //       // Got a network error, time-out or HTTP error in the 400 or 500 range.
+  //       return false;
+  //     }
+  //   }
+  // });   
+
+  // console.log("THIS IS FROM THE SERVER CODE!");
+  
+  // // var result = HTTP.call("GET", "http://www.google.com");
+  // Meteor.call("checkYCnews");
 
 }
 

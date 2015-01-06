@@ -199,6 +199,54 @@ button.borrar {
 	text-align: center; 
 }
 
+.nuevo-logo span#trollmercio {
+	font-size: 64px;
+	color: black;
+	font-family: 'Old London';
+	text-align: center;
+	/*margin-bottom: 50px;*/
+}
+
+#anios1 {
+	font-family: 'Playfair Display', serif;
+	font-size: 90px;
+	color: white;
+	position: relative;
+	letter-spacing: -10px;
+	padding-bottom: 20px;
+	line-height: 60px;
+}
+
+#anios1:after {
+	content: "AÑOS";
+	font-family: 'Crimson Text Bold', serif;
+	font-size: 13px;
+	font-weight: bold !important;
+	color: black;
+	border-top: 1px solid black; 
+	border-bottom: 1px solid black; 
+	letter-spacing: 1px;
+	line-height: 8px;
+	float: left;
+	vertical-align: center;
+	position: absolute;
+	top: 70px;
+	left: 55px;
+	padding: 3px 0px 3px 0px;
+}
+
+.nuevo-logo {
+	text-align: center;
+	margin-left: 50px;
+}
+
+.puntos {
+	font-size: 14px;
+	margin-left: 10px;
+	margin-top: 3px;
+}
+
+
 /* ESTRUCTURA GENERAL
 ========================================================================== */
 /* CALENDARIO */
@@ -257,7 +305,7 @@ a.go-login { margin-right: 10px; }
 .u-config-items li a { background-color: #fff; color: #333; font-size: 13px; }
 .u-config-items li a:hover { }
 .u-suscribir { width: 100px; }
-.u-fecha-clima { font: 15px/25px 'prelomedium'; padding-left: 103px; width: 500px; }
+.u-fecha-clima { font: 15px/25px 'prelomedium'; padding-left: 190px; width: 500px; }
 .u-buscar input, .u-buscar button { background-color: #fff; border: 0 none; color: #cdac47; float: left; height: 25px; padding: 0; }
 .u-buscar input { font-size: 14px; padding: 3px; width: 155px; }
 .u-buscar button { font: 13px/25px 'FontAwesome'; width: 25px; }
