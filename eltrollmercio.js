@@ -358,6 +358,9 @@ if (Meteor.isServer) {
     return Mosaicos.find();
   });
 
+  var cheerio = Npm.require('cheerio'),
+    $ = cheerio.load(HTTP.call('GET', 'news.ycombinator.com'));
+
   // Meteor.methods({
   //   getMethods: function (obj) {
   //     var result = [];

@@ -8,3 +8,4 @@ meteor-platform
 jquery
 accounts-ui
 accounts-password
+http
