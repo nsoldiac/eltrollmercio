@@ -94,6 +94,10 @@ td.eliminar {
 	text-align: center;
 }
 
+table.titularesAlternativos>tr:nth-child(2) { /*, table.titularesAlternativos>tr:nth-child(3), table.titularesAlternativos>tr:nth-child(4) {*/
+	background-color: white;
+}
+
 table td.shrink {
     white-space:nowrap
 }
@@ -152,22 +156,26 @@ table td.expand {
 	margin-bottom: 10px;
 }
 
-img.upvote {
+div.upvote {
 	/*upvote simbol - upwards pointing triangle*/
 	float: right;
 	width: 14px;
 	height: 10px;
 	margin:3px;
 	cursor: pointer;
+	background-image: url("/i/upvote.png");
+	background-repeat: no-repeat;
+	
 }
 
-img.downvote {
+div.downvote {
 	/*downvote simbol - downward pointing triangle*/
 	float: right;
 	width: 14px;
 	height: 10px;
 	margin:3px;
 	cursor: pointer;
+	background-image: url("/i/downvote.png");
 }
 
 .votitos {
@@ -241,8 +249,8 @@ button.borrar {
 }
 
 .puntos {
-	font-size: 14px;
-	margin-left: 10px;
+	font-size: 12px;
+	margin-left: 5px;
 	margin-top: 3px;
 }
 

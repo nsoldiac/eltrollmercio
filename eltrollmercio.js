@@ -107,7 +107,7 @@ if (Meteor.isClient) {
         window.alert("Si no estas logueado no puedes aportar :(");
         throw new Meteor.Error("not-authorized");
       }
-      Meteor.call("aumentarVoto", this._id);
+      Meteor.call("aumentarVoto", this._id, Meteor.user().username);
     },
     "click .downvote": function () {
       if (! Meteor.userId()) {
@@ -124,13 +124,13 @@ if (Meteor.isClient) {
     },
     puntosUsuario: function(user) {
       var total = 0;
-      var result = Titulares.find( { usuario: user } );
+      var result = Titulares.find( { owner: user } );
       result.forEach(function (doc) {
         total += doc.votos;
       });
       // console.log(total);
       return total;
-    }
+    },
   }); 
 
   Template.votaciones.events({
@@ -183,6 +183,11 @@ Meteor.methods({
       window.alert("Si no estas logueado no puedes aportar :(");
       throw new Meteor.Error("not-authorized");
     }
+    else if (texto == "") {
+      return false;
+    }
+
+    console.log(Meteor.username);
 
     Titulares.insert({
       idNoticia: noticia,
@@ -190,7 +195,8 @@ Meteor.methods({
       votos: 0,
       createdAt: new Date(),
       owner: Meteor.userId(),
-      usuario: Meteor.user().username
+      ownerName: Meteor.user().username,
+      usuariosVotantes: []
     });
   },
 
@@ -204,18 +210,25 @@ Meteor.methods({
     Titulares.remove(noticia);
   },
 
-  aumentarVoto: function (id) {
+  aumentarVoto: function (id, userid) {
     var noticia = Titulares.findOne({_id: id});
+    var votantes = noticia.usuariosVotantes;
     var masVotos = noticia.votos;
-    masVotos += 1;
-    // console.log("Votos: "+masVotos)
+    
+    if ('r' == 'asdf') {
 
-    Titulares.update(
-      {_id: id}, 
-      {
-        $set: {votos : masVotos}
-      }
-    );
+    }
+    else if (votantes.indexOf(userid) < 0) {
+      masVotos += 1;
+      Titulares.update(
+        {_id: id}, 
+        {$set: {votos : masVotos}}
+      );
+      Titulares.update(
+        {_id: id}, 
+        {$push: {usuariosVotantes: userid}}
+      );
+    }
   },
 
   disminuirVoto: function (id) {
@@ -223,7 +236,6 @@ Meteor.methods({
     var menosVotos = noticia.votos;
     if (menosVotos > 0) {
       menosVotos -= 1;
-      // console.log("Votos: "+menosVotos)
 
       Titulares.update(
         {_id: id}, 
@@ -237,6 +249,7 @@ Meteor.methods({
   insertNoticias: function () {
     
     Mosaicos.remove({});
+    Titulares.remove({});
 
     var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "01.jpg", "positionLeft" : 15, "positionTop" : 7, "texto" : "La animación de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
     var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "02.jpg", "positionTop" : 7, "positionLeft" : 205, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
