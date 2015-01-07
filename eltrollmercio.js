@@ -102,19 +102,20 @@ if (Meteor.isClient) {
       }
       Meteor.call("eliminarTitular", this._id);
     },
-    "click .upvote": function () {
+    "click .upvote, click .upvoteClicked": function () {
       if (! Meteor.userId()) {
         window.alert("Si no estas logueado no puedes aportar :(");
         throw new Meteor.Error("not-authorized");
       }
       Meteor.call("aumentarVoto", this._id, Meteor.user().username);
     },
-    "click .downvote": function () {
+
+    "click .downvote, click .downvoteClicked": function () {
       if (! Meteor.userId()) {
         window.alert("Si no estas logueado no puedes aportar :(");
         throw new Meteor.Error("not-authorized");
       }
-      Meteor.call("disminuirVoto", this._id);
+      Meteor.call("disminuirVoto", this._id, Meteor.user().username);
     }
   });
 
@@ -131,6 +132,26 @@ if (Meteor.isClient) {
       // console.log(total);
       return total;
     },
+    upV: function (id) {
+      var upVoters = Titulares.findOne({_id: id}).usuariosUpvoters;
+
+      if ( upVoters.indexOf(Meteor.user().username) >= 0 ) {
+        return "upvoteClicked";
+      }
+      else {
+        return "upvote";
+      }
+    },
+    downV: function (id) {
+      var upVoters = Titulares.findOne({_id: id}).usuariosDownvoters;
+
+      if ( upVoters.indexOf(Meteor.user().username) >= 0 ) {
+        return "downvoteClicked";
+      }
+      else {
+        return "downvote";
+      }
+    }
   }); 
 
   Template.votaciones.events({
@@ -187,7 +208,7 @@ Meteor.methods({
       return false;
     }
 
-    console.log(Meteor.username);
+    // console.log(Meteor.username);
 
     Titulares.insert({
       idNoticia: noticia,
@@ -196,14 +217,15 @@ Meteor.methods({
       createdAt: new Date(),
       owner: Meteor.userId(),
       ownerName: Meteor.user().username,
-      usuariosVotantes: []
+      usuariosUpvoters: [],
+      usuariosDownvoters: []
     });
   },
 
   eliminarTitular: function (idTitular) {
     var noticia = Titulares.findOne(idTitular);
-    if (Meteor.userId() ==! 'nsoldiac') { //task.private && task.owner !== 
-      // If the task is private, make sure only the owner can delete it
+
+    if (Meteor.userId() ==! 'nsoldiac') { 
       throw new Meteor.Error("not-authorized");
     }
 
@@ -212,13 +234,25 @@ Meteor.methods({
 
   aumentarVoto: function (id, userid) {
     var noticia = Titulares.findOne({_id: id});
-    var votantes = noticia.usuariosVotantes;
+    var votantesUp = noticia.usuariosUpvoters;
+    var votantesDown = noticia.usuariosDownvoters;
     var masVotos = noticia.votos;
     
-    if ('r' == 'asdf') {
-
+    if ( votantesDown.indexOf(userid) >= 0 ) {
+      Titulares.update(
+        {_id: id}, 
+        {$pull: {usuariosDownvoters: userid}}
+      );
+      if (masVotos !== 0) {
+        masVotos += 1;
+        Titulares.update(
+          {_id: id}, 
+          {$set: {votos : masVotos}}
+        );
+      }
     }
-    else if (votantes.indexOf(userid) < 0) {
+    
+    if ( votantesUp.indexOf(userid) < 0 ) {
       masVotos += 1;
       Titulares.update(
         {_id: id}, 
@@ -226,23 +260,65 @@ Meteor.methods({
       );
       Titulares.update(
         {_id: id}, 
-        {$push: {usuariosVotantes: userid}}
+        {$push: {usuariosUpvoters: userid}}
+      );
+    } else if ( votantesUp.indexOf(userid) >= 0 ) {
+      Titulares.update(
+        {_id: id}, 
+        {$pull: {usuariosUpvoters: userid}}
+      );
+      masVotos -= 1;
+      Titulares.update(
+        {_id: id}, 
+        {$set: {votos : masVotos}}
       );
     }
   },
 
-  disminuirVoto: function (id) {
+  disminuirVoto: function (id, userid) {
     var noticia = Titulares.findOne({_id: id});
+    var votantesUp = noticia.usuariosUpvoters;
+    var votantesDown = noticia.usuariosDownvoters;
     var menosVotos = noticia.votos;
-    if (menosVotos > 0) {
-      menosVotos -= 1;
 
+    if ( votantesUp.indexOf(userid) >= 0 ) {
       Titulares.update(
         {_id: id}, 
-        {
-          $set: {votos : menosVotos}
-        }
+        {$pull: {usuariosUpvoters: userid}}
       );
+      if (menosVotos > 0) {
+        menosVotos -= 1;
+        Titulares.update(
+          {_id: id}, 
+          {$set: {votos : menosVotos}}
+        );
+      }
+    }
+
+    if ( votantesDown.indexOf(userid) < 0 ) {
+      if (menosVotos > 0) {
+        menosVotos -= 1;
+        Titulares.update(
+          {_id: id}, 
+          {$set: {votos : menosVotos}}
+        );
+      }
+      Titulares.update(
+        {_id: id}, 
+        {$push: {usuariosDownvoters: userid}}
+      );
+    } else if ( votantesDown.indexOf(userid) >= 0 ) {
+      Titulares.update(
+        {_id: id}, 
+        {$pull: {usuariosDownvoters: userid}}
+      );
+      if (menosVotos > 0) {
+        menosVotos += 1;
+          Titulares.update(
+            {_id: id}, 
+            {$set: {votos : menosVotos}}
+          );
+      }
     }
   },
 

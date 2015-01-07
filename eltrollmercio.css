@@ -157,29 +157,44 @@ table td.expand {
 }
 
 div.upvote {
-	/*upvote simbol - upwards pointing triangle*/
+	background-image: url("/i/upVote.png");
 	float: right;
 	width: 14px;
 	height: 10px;
 	margin:3px;
 	cursor: pointer;
-	background-image: url("/i/upvote.png");
-	background-repeat: no-repeat;
-	
+}
+
+div.upvoteClicked {
+	background-image: url("/i/upvoteGreen.png");
+	float: right;
+	width: 14px;
+	height: 10px;
+	margin:3px;
+	cursor: pointer;
 }
 
 div.downvote {
-	/*downvote simbol - downward pointing triangle*/
 	float: right;
 	width: 14px;
 	height: 10px;
 	margin:3px;
 	cursor: pointer;
-	background-image: url("/i/downvote.png");
+	background-image: url("/i/downVote.png");
+}
+
+div.downvoteClicked {
+	float: right;
+	width: 14px;
+	height: 10px;
+	margin:3px;
+	cursor: pointer;
+	background-image: url("/i/downvoteRed.png");
 }
 
 .votitos {
-	/*float: center;*/
+	float: right;
+	margin-right: 10px;
 	margin-top: 7px;
 }
 
