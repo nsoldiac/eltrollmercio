@@ -41,7 +41,7 @@ if (Meteor.isClient) {
         total += doc.votos;
       });
 
-      return "Puntos: " + total;
+      return total + " ptos.";
     },
     desdeCuando: function () {
       var origin = new Date("2014/12/26");
