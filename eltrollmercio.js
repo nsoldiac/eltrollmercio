@@ -51,18 +51,20 @@ if (Meteor.isClient) {
 
       return total;
     }
+    // jsonTest: function () {
+    //   return Meteor.call("sampleCall");
+    // }
   });
 
   Template.body.events({
     "click .agregar-data": function () {
       Meteor.call("insertNoticias");
-    }
+    },
 
   });
 
   Template.mosaico.events({
     "click .popup-voting": function () {
-      // Meteor.call("getMasVotado", this._id);
       Session.set("idNoticia", this._id);
 
       var h = $(document).height();
@@ -358,42 +360,75 @@ if (Meteor.isServer) {
     return Mosaicos.find();
   });
 
-  var cheerio = Npm.require('cheerio'),
-    $ = cheerio.load(HTTP.call('GET', 'news.ycombinator.com'));
+  // HTTP call and parsing section
+  var request = Npm.require('request');
 
-  // Meteor.methods({
-  //   getMethods: function (obj) {
-  //     var result = [];
-  //     for (var id in obj) {
-  //       try {
-  //         if (typeof(obj[id]) == "function") {
-  //           result.push(id + ": " + obj[id].toString());
-  //         }
-  //       } catch (err) {
-  //         result.push(id + ": inaccessible");
-  //       }
-  //     }
-  //     return result;
-  //   },
-  //   checkYCnews: function () {
-  //     this.unblock();
-  //     try {
-  //       var result = HTTP.call("GET", "http://www.google.com");
-  //       console.log(Meteor.call("getMethods(result)"));
-  //       return true;
-  //     } catch (e) {
-  //       // Got a network error, time-out or HTTP error in the 400 or 500 range.
-  //       return false;
-  //     }
-  //   }
-  // });   
+  Meteor.methods({
 
-  // console.log("THIS IS FROM THE SERVER CODE!");
-  
-  // // var result = HTTP.call("GET", "http://www.google.com");
-  // Meteor.call("checkYCnews");
+    sampleCall: function () {
+      // request("http://elcomerio.pe", 
+      // function(err, response, body) {
+        var getContent = HTTP.call("GET",'http://elcomercio.pe');
+        var cheerio = Npm.require('cheerio'),
+          $ = cheerio.load(getContent.content);
+        // var thecall = Meteor.HTTP.call("GET",'http://elcomerio.pe');
+        // var elcomercio = JSON.parse(body);
+        var clase = [];
+        var titular = [];
+        var categoria = [];
+        var texto = [];
+        var imgHeight = [];
+        var imgWidgth = [];
+        $('article.ui-box.ui-tiponota').each(function(i, elem) {
+          elcomercio[i] = $(this).text();
+        });
+        console.log(elcomercio.join('\n'));
+        console.log(typeof(elcomercio));
+        // console.log(getContent.content);
+      }
 
+  }); 
+
+  Meteor.call("sampleCall");
 }
+
+        /* JSON FROM API
+        {
+          "Titular": {
+            "href": "http://elcomercio.pe/redes-sociales/google/ano-nuevo-2015-google-le-da-bienvenida-este-doodle-noticia-1782141?flsm=1",
+            "class": "bi3dArtId-1782141 bi3dArtType-photo bi3dHtext",
+            "text": "Google le da la bienvenida al 2015 con este doodle"
+          },
+          "Foto": {
+            "height": "99",
+            "width": "176",
+            "alt": "Año Nuevo 2015: Google le da la bienvenida con este doodle",
+            "src": "http://cde.3.elcomercio.pe/ima/0/1/0/3/3/1033566/366x205.jpg",
+            "href": "http://elcomercio.pe/redes-sociales/google/ano-nuevo-2015-google-le-da-bienvenida-este-doodle-noticia-1782141",
+            "text": ""
+          },
+          "Categoria": { 
+            "href": "http://elcomercio.pe/redes-sociales",
+            "text": "Redes Sociales"
+          },
+          "Texto": ""
+        }
+
+        // JSON FOR MONGO INSERT
+        {
+          "idNoticia" : "noticia2", 
+          "titular" : "Facebook: no todos quieren recordar su año en la red social", 
+          "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", 
+          "categoria" : "Redes Sociales", 
+          "nombreImagen" : "02.jpg",
+          "height" : 99, 
+          "width" : 176, 
+          "class" : 
+          "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", 
+          "createdAt" : new Date()
+        }
+
+        */
 
 
 

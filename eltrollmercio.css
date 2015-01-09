@@ -403,7 +403,7 @@ body#home .ec-logo-slinks h1, body#home .ec-logo-slinks h1 a, body#home .ec-logo
 body#home .ec-logo-slinks h1, body#home .ec-logo-slinks h2 { margin: 0 auto; }
 body#home .ec-logo-slinks h1 a, body#home .ec-logo-slinks h2 a { background-image: url("/i/ec_logo_175.png?121214"); display: block; text-indent: -9999px; }
 
-.social-links {position: absolute; top: 7px; left: 15px;}
+.social-links {position: absolute; top: 7px; left: 5px;}
 .social-links ul li, .social-links ul li a { display: block; float: left; height: 22px; width: 22px; text-align: center;}
 .social-links ul li { margin-left: 5px; }
 .social-links ul li.ty { margin-right: 0; }
@@ -418,13 +418,14 @@ body#home .ec-logo-slinks h1 a, body#home .ec-logo-slinks h2 a { background-imag
 .ec-logo, .ec-logo a { height: 35px; width: 169px; }
 .ec-logo { display: none; float: left; margin: 0; }
 .ec-logo a { background: url("/i/ec_logo.png") no-repeat 35px -289px; display: block; text-indent: -9999px; }
-#ec-menu-items { display: table-row; height: 35px; }
-#ec-menu-items > li, #ec-menu-items > li > a { }
-#ec-menu-items > li { background-color: #ddd; display: table-cell; position: relative; vertical-align: top; width: 1%; }
+#ec-menu-items { height: 35px; width: 100%; background-color: #ccc;}
+/*#ec-menu-items > li, #ec-menu-items > li > a { }*/
+#ec-menu-items > li { background-color: #ddd; display: inline-block; float:left; position: relative; vertical-align: center;  }
+#ec-menu-items > li:last-child {float: right; width: 130px; background-color: #ccc; padding-right: 5px;}
 #ec-menu-items > li > a { background: url("/i/m_separator.png") no-repeat right 8px; color: #333; display: inline-block; font: 15px/35px "prelobold"; min-width: 100%; padding: 0 8px; text-align: center; text-transform: uppercase; white-space: nowrap; }
 #ec-menu-items > li > a.active { background-color: #fff !important; height: 37px; margin-left: -1px; margin-top: -2px; padding-top: 2px; }
 #ec-menu-items > li.m-home { }
-#ec-menu-items > li.m-home > a { background: url("/i/ec_icon.png") no-repeat center 9px; padding: 0 18px; text-indent: -9999px; }
+#ec-menu-items > li.m-home > a {padding: 0 18px;  }
 #ec-menu-items > li.m-home > a.active { background-position: center 10px; margin-left: 0; }
 #ec-menu-items > li.sb-item { background-color: #ccc; }
 #ec-menu-items > li.sb-item > a { }
