@@ -101,29 +101,18 @@
 								<a  class="active" >Lo Ultimo</a>
 							</li>
 							<li class="m-politica ">
-    							<a  href="http://elcomercio.pe/politica?ref=portada_home&amp;ft=menu_nav" >Política</a>
+    							<a>Lo mejor del día</a>
 							</li>	    					
 							<li class="m-gastronomia ">
-    							<a  href="http://elcomercio.pe/economia?ref=portada_home&amp;ft=menu_nav" >Economía</a>
+    							<a>De la semana</a>
 							</li>
 							<li class="opinion ">
-    							<a  href="http://elcomercio.pe/opinion?ref=portada_home&amp;ft=menu_nav" >Opinión</a>
+    							<a>Del mes</a>
 							</li>
-							<li class="m-tvmas sb-item">
-								<a href="http://elcomercio.pe/tvmas" >TV+</a>
+							<li class="sb-item html-get">
+								<a>html.get('elcomercio.pe')</a>
 							</li>
-<!-- 							<li class="m-dt sb-item">
-								<div class="social-links">
-									<ul>
 
-										<li class="rss"><a href="http://elcomercio.pe/rss" target="_blank" >&#xf09e;</a></li>
-										<li class="fb"><a href="http://www.facebook.com/elcomercio.pe" target="_blank" >&#xf09a;</a></li>
-										<li class="tw"><a href="http://twitter.com/elcomercio" target="_blank" >&#xf099;</a></li>
-										<li class="gp"><a href="https://plus.google.com/u/0/117031244658300634975/" target="_blank" >&#xf0d5;</a></li>
-										<li class="yt"><a href="https://www.youtube.com/user/VideosComercio" target="_blank" >&#xf16a;</a></li>
-									</ul>
-								</div>
-							</li> -->
 							<li class="agregar-data">
 								<div class="social-links">
 									<ul>
@@ -146,7 +135,8 @@
 {{#each items}}
 	{{> mosaico}}
 {{/each}}
-
+ 
+ <!--
 <article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 775px; left: 395px;">											
 	<figure class="bi3dArtId-1780932 bi3dArtType-photo">
 		<figcaption>
@@ -285,13 +275,16 @@
 			<img src="/i/15.jpg"  alt="YouTube: fenomeno anormal en plena celebración de Navidad" width="176" height="99">
 		</span>	
 	</figure>					
-</article>
+</article> --> 
 <!-- 
 <article class="ui-box ui-box2x3 ui-tipobanner popup-voting"  style="position: absolute; top: 197px; left: 585px;">
 	<img src="/i/publicidad1.gif" alt="Publicidad">
 </article>	 -->	
 
 </div>	
+<div class="footer">
+	<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+</div>
 </div>		
 
 
@@ -354,7 +347,7 @@
 			    <p>{{texto}}</p>
 			</figcaption>
 			<div class="img">
-				<img src="/i/{{nombreImagen}}" width="{{width}}" height="{{height}}">
+				<img src="{{nombreImagen}}" width="{{width}}" height="{{height}}">
 			</div>	
 		</figure>			
 	</article>
@@ -362,7 +355,7 @@
 
 <template name="votaciones">
 	<div class="noticiaOriginal">
-		<div class="fotoNoticia"><img src="/i/{{getNombreImagen}}" alt="Imagen Original"></div>
+		<div class="fotoNoticia"><img src="{{getNombreImagen}}" alt="Imagen Original"></div>
 		<div class="titularOriginal">
 			<span>ARTÍCULO ORIGINAL:</span>
 			<h2>{{getTitular}}</h2>

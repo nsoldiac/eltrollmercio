@@ -330,6 +330,15 @@ div.leaderboard>table>tr>td:nth-child(2) {
 	width: 99%;
 }
 
+.footer {
+	width: 100%;
+	text-align: center;
+}
+
+.html-get {
+	cursor: pointer;
+}
+
 /* ESTRUCTURA GENERAL
 ========================================================================== */
 /* CALENDARIO */

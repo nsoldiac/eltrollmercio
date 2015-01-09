@@ -60,7 +60,9 @@ if (Meteor.isClient) {
     "click .agregar-data": function () {
       Meteor.call("insertNoticias");
     },
-
+    "click .html-get": function () {
+      Meteor.call("sampleCall");
+    }
   });
 
   Template.mosaico.events({
@@ -329,13 +331,13 @@ Meteor.methods({
     Mosaicos.remove({});
     Titulares.remove({});
 
-    var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "01.jpg", "positionLeft" : 15, "positionTop" : 7, "texto" : "La animación de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
-    var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "02.jpg", "positionTop" : 7, "positionLeft" : 205, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document3 = { "idNoticia" : "noticia3", "titular" : "Mujeres pelean por regalos que peatones dieron a niños", "texto" : "Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles Cádiz y Marconi, en San Isidro", "categoria" : "Lima", "nombreImagen" : "03.jpg", "positionTop" : 7, "positionLeft" : 395, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document4 = { "idNoticia" : "noticia4", "titular" : '"Cuatro pasos para salir de pulpín", por Eduardo Morón', "texto" : "Las empresas no buscan trabajadores, sino talento, y cuando lo encuentran esán dispuestos a pagar por retenerlo, dice Morán", "categoria" : "Economía", "nombreImagen" : "04.jpg", "positionTop" : 7, "positionLeft" : 585, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document5 = { "idNoticia" : "noticia5", "titular" : "Editorial: De maduro a rancio", "texto" : "Una vez más, el chavismo consolidó su control en las distintas instituciones del Estado.", "categoria" : "Opinión", "nombreImagen" : "05.jpg", "positionTop" : 7, "positionLeft" : 775, "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document6 = { "idNoticia" : "noticia6", "titular" : "Hay más venta de viviendas en Lima norte pese a contracción", "texto" : "Comas, Carabayllo y SMP sintieron la retracción pero tuvieron mejor ritmo debido a los proyectos multifamiliares. ►Vender o alquilar un inmueble: Cuándo es conveniente hacerlo? ►► Piensas comprar una vivienda? Descubre lo que más te conviene", "categoria" : "Economía", "nombreImagen" : "06.jpg", "positionTop" : 197, "positionLeft" : 15, "height" : 404, "width" : 556, "class" : "ui-box ui-box3x3 ui-modtop2 ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document7 = { "idNoticia" : "noticia7", "titular" : "Diego Forlán: Chemo me llamó, pero no hay nada con la 'U'", "texto" : "Diego Forlán confirmó que tiene contrato en Japón, con lo que descartó posible llegada a Universitario de Deportes", "categoria" : "Deporte Total", "nombreImagen" : "07.jpg", "positionTop" : 775, "positionLeft" : 15, "height" : 205, "width" : 366, "class" : "ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "/i/01.jpg", "texto" : "La animación de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
+    var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "/i/02.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document3 = { "idNoticia" : "noticia3", "titular" : "Mujeres pelean por regalos que peatones dieron a niños", "texto" : "Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles Cádiz y Marconi, en San Isidro", "categoria" : "Lima", "nombreImagen" : "/i/03.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document4 = { "idNoticia" : "noticia4", "titular" : '"Cuatro pasos para salir de pulpín", por Eduardo Morón', "texto" : "Las empresas no buscan trabajadores, sino talento, y cuando lo encuentran esán dispuestos a pagar por retenerlo, dice Morán", "categoria" : "Economía", "nombreImagen" : "/i/04.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document5 = { "idNoticia" : "noticia5", "titular" : "Editorial: De maduro a rancio", "texto" : "Una vez más, el chavismo consolidó su control en las distintas instituciones del Estado.", "categoria" : "Opinión", "nombreImagen" : "/i/05.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document6 = { "idNoticia" : "noticia6", "titular" : "Hay más venta de viviendas en Lima norte pese a contracción", "texto" : "Comas, Carabayllo y SMP sintieron la retracción pero tuvieron mejor ritmo debido a los proyectos multifamiliares. ►Vender o alquilar un inmueble: Cuándo es conveniente hacerlo? ►► Piensas comprar una vivienda? Descubre lo que más te conviene", "categoria" : "Economía", "nombreImagen" : "/i/06.jpg", "height" : 404, "width" : 556, "class" : "ui-box ui-box3x3 ui-modtop2 ui-tiponota popup-voting", "createdAt" : new Date()};
+    var Document7 = { "idNoticia" : "noticia7", "titular" : "Diego Forlán: Chemo me llamó, pero no hay nada con la 'U'", "texto" : "Diego Forlán confirmó que tiene contrato en Japón, con lo que descartó posible llegada a Universitario de Deportes", "categoria" : "Deporte Total", "nombreImagen" : "/i/07.jpg", "height" : 205, "width" : 366, "class" : "ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
    
     Mosaicos.insert(Document1);
     Mosaicos.insert(Document2);
@@ -366,30 +368,50 @@ if (Meteor.isServer) {
   Meteor.methods({
 
     sampleCall: function () {
-      // request("http://elcomerio.pe", 
-      // function(err, response, body) {
         var getContent = HTTP.call("GET",'http://elcomercio.pe');
         var cheerio = Npm.require('cheerio'),
           $ = cheerio.load(getContent.content);
-        // var thecall = Meteor.HTTP.call("GET",'http://elcomerio.pe');
-        // var elcomercio = JSON.parse(body);
+        var link = [];
         var clase = [];
         var titular = [];
         var categoria = [];
         var texto = [];
+        var imgURL = [];
         var imgHeight = [];
         var imgWidgth = [];
+
         $('article.ui-box.ui-tiponota').each(function(i, elem) {
-          elcomercio[i] = $(this).text();
+          link[i] = $(this).find('figure > figcaption > h2 > a').attr('href');
+          clase[i] = $(this).attr('class');
+          titular[i] = $(this).find('figure > figcaption > h2 > a').text();
+          categoria[i] = $(this).find('figure > figcaption > h3 > a').text();
+          texto[i] = $(this).find('figure > figcaption > p').text();
+          imgURL[i] = $(this).find('figure > a > img').attr('src');
+          imgHeight[i] = $(this).find('figure > a > img').attr('height');
+          imgWidgth[i] = $(this).find('figure > a > img').attr('width');
         });
-        console.log(elcomercio.join('\n'));
-        console.log(typeof(elcomercio));
-        // console.log(getContent.content);
+        // console.log(link.join('\n'));
+        // console.log(link.length);
+
+        for (i = 0; i < 15; i++) {
+          Mosaicos.insert({ 
+            "idNoticia" : link[i], 
+            "titular" : titular[i], 
+            "texto" : texto[i], 
+            "categoria" : categoria[i], 
+            "nombreImagen" : imgURL[i], 
+            "height" : imgHeight[i], 
+            "width" : imgWidgth[i], 
+            "class" : clase[i] + " popup-voting", 
+            "createdAt" : new Date()
+          }); 
+
+        }
+
       }
 
   }); 
 
-  Meteor.call("sampleCall");
 }
 
         /* JSON FROM API
