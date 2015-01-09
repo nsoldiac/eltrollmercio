@@ -78,7 +78,7 @@ if (Meteor.isClient) {
 
   Template.mosaico.helpers({
     getMasVotado: function (id) {
-      var doc = Titulares.find({idNoticia: id}, {sort: {votos: -1}, limit: 1});//[0].titular;
+      var doc = Titulares.find({idNoticia: id}, {sort: {votos: -1, createdAt: -1}, limit: 1});//[0].titular;
       var count = 0;
       var titu = ""
       doc.forEach(function (post) {
@@ -353,6 +353,9 @@ Meteor.methods({
 
 if (Meteor.isServer) {
 
+/*
+  Npm.depends({cheerio: "0.18.0"});
+*/
   // Only publish tasks that are public or belong to the current user
   Meteor.publish("titulares-prueba", function () {
     return Titulares.find();
@@ -394,6 +397,8 @@ if (Meteor.isServer) {
         // console.log(link.length);
 
         for (i = 0; i < 15; i++) {
+          
+          // if 
           Mosaicos.insert({ 
             "idNoticia" : link[i], 
             "titular" : titular[i], 

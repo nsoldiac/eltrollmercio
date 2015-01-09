@@ -30,10 +30,10 @@
 						<li id="user-info" class="u-login">
 							<div class="u-links">
 								{{> loginButtons}}
-							</div>
 							{{#if currentUser}}
 							<div class="puntos">{{puntos}}</div>
 							{{/if}}
+							</div>
 						</li>
 						<li class="u-fecha-clima">{{fecha}} | 21 °C</li>
 						<!-- <li class="u-buscar">
@@ -48,7 +48,7 @@
 				<div class="leaderboard">
 					<table>
 						<tr>
-							<th colspan="3">Leaderboard</th>
+							<th colspan="3">Usuarios Top</th>
 						</tr>
 						<tr>
 							<td>1.</td>
@@ -66,17 +66,22 @@
 							<td>0 pts.</td>
 						</tr>
 						<tr>
-							<td>1.</td>
+							<td>4.</td>
 							<td>nsoldiac</td>
 							<td>15 pts.</td>
 						</tr>
 						<tr>
-							<td>2.</td>
+							<td>5.</td>
 							<td>test</td>
 							<td>6 pts.</td>
 						</tr>
 						<tr>
-							<td>3.</td>
+							<td>6.</td>
+							<td>test2</td>
+							<td>0 pts.</td>
+						</tr>
+						<tr>
+							<td>7.</td>
 							<td>test2</td>
 							<td>0 pts.</td>
 						</tr>
@@ -136,146 +141,6 @@
 	{{> mosaico}}
 {{/each}}
  
- <!--
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 775px; left: 395px;">											
-	<figure class="bi3dArtId-1780932 bi3dArtType-photo">
-		<figcaption>
-			<h2>
-	   			<span>Emotivo reencuentro con una víctima del tsunami 10 años después</span>
-			</h2>
-			<h3>
-		  		<span>Mundo</span>
-			</h3>		
-			<p>El periodista, Andrew Harding, regresó a Banda Aceh, en Indonesia, para reencontrarse con una sobreviviente del desastre</p>
-		</figcaption>
-		<span>
-			<img src="/i/08.jpg"  alt="Emotivo reencuentro con una víctima del tsunami 10 años después" width="176" height="99">
-		</span>
-	</figure>					
-</article>
-															
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 775px; left: 585px;">												
-	<figure class="bi3dArtId-1780896 bi3dArtType-photo">
-		<figcaption>
-			<h2>
-		   		<span>Ley laboral juvenil: demanda en el TC se analizaría en marzo</span>
-			</h2>
-			<h3>
-			  <span>Política</span>
-			</h3>				
-		   	<p>Si la&nbsp;acci&oacute;n es admitida, el Congreso tendrá 30 días para responderla. Adem&aacute;s, miembros del TC estarán&#8230;</p>
-		</figcaption>
-		<span>
-			<img src="/i/09.jpg"  alt="Ley laboral juvenil: TC analizaría demanda en marzo" width="176" height="99">
-		</span>
-	</figure>					
-</article>
-															
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting"  style="position: absolute; top: 775px; left: 775px;">
-	<figure class="bi3dArtId-1780916 bi3dArtType-photo">
-		<figcaption>
-			<h2>
-		   	<span>Prejuicios sobre el trabajo informal, por Iván Alonso</span>
-			</h2>
-			<h3>
-				<span>Opinión</span>
-			</h3>			
-		   	<p>El trabajo informal se presenta casi como una esclavitud.</p>
-		</figcaption>
-		<span>
-			<img src="/i/10.jpg"  alt="Prejuicios sobre el trabajo informal, por Iván Alonso" width="176" height="99">
-		</span>
-	</figure>					
-</article>
-															
-
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 965px; left: 395px;">
-													
-	<figure class="bi3dArtId-1780686 bi3dArtType-photo">
-		<figcaption>
-			<h2>
-		   		<span>Diez frases que nunca debes decirle a tu ex</span>
-			</h2>
-			<h3>
-				<span>Viù</span>
-			</h3>			
-		   	<p>Ser demasiado expresiva con las cosas que sientes tras la ruptura puede meterte en problemas y hacerte quedar mal</p>
-		</figcaption>
-		<span>
-			<img src="/i/11.jpg"  alt="Diez frases que nunca debes decirle a tu ex aunque las sientas" width="176" height="99">
-		</span>
-	</figure>					
-</article>
-															
-																				 											
-<article class="ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 965px; left: 585px;">			   
-	<figure class="bi3dArtId-1780822 bi3dArtType-photo">
-	   <figcaption>
-	   		<h2>
-	      		<span>YouTube: Norman, el perro que odia los villancicos (VIDEO)</span>
-	   		</h2>
-	   		<p>El viral en <span>YouTube</span> podría demostrar que los perros &ldquo;sí tienen gusto para la música. Qué opinas?</p>
-			<h3>
-				<span>Redes Sociales</span>
-			</h3>		
-		</figcaption>
-	    <span>
-	    	<img src="/i/12.jpg"  alt="YouTube: Norman, el perro que odia las canciones navideñas" width="366" height="205">
-		</span>
-	   </figure>					
-</article>
-															
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 1155px; left: 15px;">										
-	<figure class="bi3dArtId-1780887 bi3dArtType-photo">
-		<figcaption>
-			<h2>
-			   <span>Las casas abandonadas que esconden historias de terror</span>
-			</h2>
-			<h3>
-				<span>Mundo</span>
-			</h3>		
-		   	<p>El fot&oacute;grafo Seph Lawless recorri&oacute; Estados Unidos fotografiando casas abandonadas quehan sido escenario de cr&iacute;menes</p>
-		</figcaption>
-		<span>
-			<img src="/i/13.jpg"  alt="Las casas abandonadas que esconden historias de terror" width="176" height="99">
-			<span class="play-fotos"></span>
-		</span>
-	</figure>					
-</article>
-															
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 1155px; left: 205px;">										
-	<figure class="">
-		<figcaption>
-			<h2>
-		   		<span>La furia de un pasajero porque le dicen Feliz Navidad</span>
-			</h2>
-			<h3>
-				<span>Redes Sociales</span>
-			</h3>				
-		   	<p>El hombre fue bajado del avi&oacute;n luego que el esp&iacute;ritu navide&ntilde;o le provocara un ataque de ira. Noticia se viraliz&oacute;&#8230;</p>
-		</figcaption>
-		<span>
-			<img src="/i/14.jpg" alt="Facebook: pasajero y su colera porque le desean Feliz Navidad" width="176" height="99">
-		</span>			
-	</figure>					
-</article>
-															
-<article class="ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting" style="position: absolute; top: 1155px; left: 395px;">
-	<figure class="bi3dArtId-1780881 bi3dArtType-photo">
-		<figcaption>
-			<h2>
-			   <span>YouTube: resplandor en el cielo visto desde todo Lima</span>
-			</h2>
-			<h3>
-			  <span>Redes Sociales</span>
-			</h3>		
-			<p>La impresionante detonación de luz que se vio en el cielo durante las celebraciones fue compartida desde diferentes puntos</p>
-		</figcaption>
-		<span>
-			<img src="/i/15.jpg"  alt="YouTube: fenomeno anormal en plena celebración de Navidad" width="176" height="99">
-		</span>	
-	</figure>					
-</article> --> 
 <!-- 
 <article class="ui-box ui-box2x3 ui-tipobanner popup-voting"  style="position: absolute; top: 197px; left: 585px;">
 	<img src="/i/publicidad1.gif" alt="Publicidad">
@@ -283,7 +148,7 @@
 
 </div>	
 <div class="footer">
-	<p>Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum </p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam voluptas, accusantium, esse, maxime harum eligendi fugiat nobis ea distinctio veritatis aliquid veniam voluptates ab similique voluptatem earum animi sequi nemo ipsam. </p>
 </div>
 </div>		
 

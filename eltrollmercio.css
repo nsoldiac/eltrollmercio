@@ -27,7 +27,7 @@
 	overflow: scroll;
 }
 
-#login-dropdown-list {
+#login-dropdown-list, #login-name-link {
 	border-radius: 0px;
 }
 
@@ -239,7 +239,7 @@ button.borrar {
 	font-weight: bold;
 	color: #5b4b05;
 	margin-bottom: 10px;
-	margin-right: 30px;
+	margin-right: 0px;
 }
 
 #anios1 {
@@ -273,7 +273,7 @@ button.borrar {
 .nuevo-logo {
 	text-align: center;
 	margin-top: 25px;
-	padding-right: 30px;
+	padding-right: 0px;
 }
 
 .puntos {
@@ -292,38 +292,45 @@ button.borrar {
 
 div.leaderboard {
 	position: absolute;
-	right: 20px;
-	top: 19px;
+	right: 15px;
+	top: 5px;
 	min-height: 50px;
 	padding: 3px;
 	border-radius: 3px;
-	min-width: 150px;
-	max-width: 180px;
+	min-width: 120px;
+	max-width: 170px;
 }
 
 div.leaderboard>table {
 	margin: 2px;
+	border: 1px solid #efe9d3;
 }
 
 div.leaderboard>table>tr {
-	font-size: 15px;
+	font-size: 14px;
 	font-family: 'prelomedium';
 	color: #5b4b05;
-
 }
 
 div.leaderboard>table>tr:first-child {
-	border-bottom: 1px solid #efe9d3;
+	border: 1px solid #efe9d3;
+	background-color: #efe9d3;
+	height: 24px;
 }
 
 div.leaderboard>table>tr>td {
-	padding-left: 10px 5px 0px 5px;
+	padding: 1px 3px 1px 3px;
+}
+
+div.leaderboard>table>tr>td:nth-child(1) {
+	padding-left: 10px;
 }
 
 div.leaderboard>table>tr>td:nth-child(3) {
 	text-align: right;
 	margin-left: 10px;
 	white-space: nowrap;
+	padding-right: 5px;
 }
 
 div.leaderboard>table>tr>td:nth-child(2) {
@@ -379,13 +386,13 @@ aside#calendar_aside { float: right; height: 306px; margin: -20px 0 20px; paddin
 .ec-marcas ul li:last-child, .ec-marcas ul li.last { border-right: 0; }
 .ec-marcas ul li a { color: #fff; display: inline-block; font: 15px/15px "prelosemibold"; min-width: 100%; padding: 0 10px; text-align: center; white-space: nowrap; }
 #ec-header { }
-.ec-apertura { background-color: #f7c600; margin: 0 auto; padding: 20px; position: relative; width: 1020px; }
+.ec-apertura { background-color: #f7c600; margin: 0 auto; padding: 10px 20px 20px 20px; position: relative; width: 1020px; }
 .ec-u-opts { }
 .ec-u-opts > ul { height: 25px; }
 .ec-u-opts > ul > li { color: #5b4b05; float: left; }
 .ec-u-opts ul li.u-suscribir > a, .ec-u-opts .u-links a { background-color: #efe9d3; border-radius: 3px; color: #5b4b05; display: inline-block; font: 14px/24px 'prelomedium'; padding: 0 15px; }
 .ec-u-opts ul li.u-buscar { float: left; width: 180px; }
-.u-login { width: 200px; float: right;}
+.u-login { width: 200px;}
 a.go-login { margin-right: 10px; }
 .u-online { font: 15px/25px 'prelomedium'; position: relative; }
 .u-online strong { font-family: 'prelobold'; font-weight: normal; }
@@ -397,7 +404,7 @@ a.go-login { margin-right: 10px; }
 .u-config-items li a { background-color: #fff; color: #333; font-size: 13px; }
 .u-config-items li a:hover { }
 .u-suscribir { width: 100px; }
-.u-fecha-clima { font: 15px/25px 'prelomedium'; padding-left: 190px; width: 500px; padding-top: 3px;}
+.u-fecha-clima { font: 15px/25px 'prelomedium'; padding-left: 210px; width: 500px; padding-top: 3px;}
 .u-buscar input, .u-buscar button { background-color: #fff; border: 0 none; color: #cdac47; float: left; height: 25px; padding: 0; }
 .u-buscar input { font-size: 14px; padding: 3px; width: 155px; }
 .u-buscar button { font: 13px/25px 'FontAwesome'; width: 25px; }
