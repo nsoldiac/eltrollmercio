@@ -78,7 +78,7 @@ td.votos {
 }
 
 .titularAlternativo {
-	padding: 10px 10px 10px 40px;
+	padding: 10px 10px 10px 10px;
 	vertical-align: top;
 	/*border: dotted 1px gray;*/
 }
@@ -133,6 +133,10 @@ table td.expand {
 	padding: 10px; 
 	position: relative;
 	display: inline-block;
+}
+
+.titularOriginal a {
+	color: white;
 }
 
 .titularOriginal h2 {

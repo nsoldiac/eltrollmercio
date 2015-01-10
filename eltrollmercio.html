@@ -93,7 +93,7 @@
 						<span id="trollmercio">El Trollmercio</span>
 						<span id="anios1">{{desdeCuando}}</span>
 					</div>
-					<div class="subtitulo">Lo que la gente opina de los titulares de El Comercio</div>
+					<div class="subtitulo">Lo que la gente opina de los titulares de El Comercio <br> (1 punto por titular, 3 puntos por voto a tu titular)</div>
 					
 				</div>
 			</header>
@@ -141,10 +141,9 @@
 	{{> mosaico}}
 {{/each}}
  
-<!-- 
-<article class="ui-box ui-box2x3 ui-tipobanner popup-voting"  style="position: absolute; top: 197px; left: 585px;">
+<article class="ui-box ui-box2x3 ui-tipobanner"  style="position: absolute; top: 197px; left: 585px;">
 	<img src="/i/publicidad1.gif" alt="Publicidad">
-</article>	 -->	
+</article>		
 
 </div>	
 <div class="footer">
@@ -199,11 +198,11 @@
 </template>
 
 <template name="mosaico">
-	<article class="{{class}}" style="float:left; position:relative"> 
+	<article class="{{class}}" style="{{style}}"> 
 		<figure class="">
 			<figcaption>
 				<h2>
-		   			<span class="newTitular">{{getMasVotado _id}}</span>
+		   			<span class="newTitular">{{getMasVotado idNoticia}}</span>
 		   			<!-- <span class="oldTitular">{{titular}}</span> -->
 				</h2>
 				<h3>
@@ -220,10 +219,10 @@
 
 <template name="votaciones">
 	<div class="noticiaOriginal">
-		<div class="fotoNoticia"><img src="{{getNombreImagen}}" alt="Imagen Original"></div>
+		<a href="{{getLink}}" target="_blank"><div class="fotoNoticia"><img src="{{getNombreImagen}}" alt="Imagen Original"></div></a>
 		<div class="titularOriginal">
 			<span>ARTÍCULO ORIGINAL:</span>
-			<h2>{{getTitular}}</h2>
+			<h2><a href="{{getLink}}" target="_blank">{{getTitular}}</a></h2>
 			<p>{{getTexto}}</p>
 		</div>
 	</div>

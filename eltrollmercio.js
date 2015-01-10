@@ -9,7 +9,7 @@ if (Meteor.isClient) {
   
   Template.body.helpers({
     items: function () {
-      return Mosaicos.find({}, {sort: {createdAt: -1}}); 
+      return Mosaicos.find({}, {sort: {createdAt: -1}, limit: 16}); 
     },
     fecha: function () {
       var date = new Date();
@@ -58,7 +58,7 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click .agregar-data": function () {
-      Meteor.call("insertNoticias");
+      Meteor.call("clearNoticias");
     },
     "click .html-get": function () {
       Meteor.call("sampleCall");
@@ -67,7 +67,7 @@ if (Meteor.isClient) {
 
   Template.mosaico.events({
     "click .popup-voting": function () {
-      Session.set("idNoticia", this._id);
+      Session.set("idNoticia", this.idNoticia);
 
       var h = $(document).height();
       $('#back-cover').toggle();
@@ -78,9 +78,9 @@ if (Meteor.isClient) {
 
   Template.mosaico.helpers({
     getMasVotado: function (id) {
-      var doc = Titulares.find({idNoticia: id}, {sort: {votos: -1, createdAt: -1}, limit: 1});//[0].titular;
+      var doc = Titulares.find({idNoticia: id}, {sort: {votos: -1, createdAt: -1}, limit: 1});
       var count = 0;
-      var titu = ""
+      var titu = "";
       doc.forEach(function (post) {
         titu = post.titular;
       });
@@ -182,15 +182,19 @@ if (Meteor.isClient) {
     }, 
     getTitular: function () {
       var id = Session.get("idNoticia");
-      return Mosaicos.findOne({_id: id}).titular;
+      return Mosaicos.findOne({idNoticia: id}).titular;
     },
     getTexto: function () {
       var id = Session.get("idNoticia");
-      return Mosaicos.findOne({_id: id}).texto;
+      return Mosaicos.findOne({idNoticia: id}).texto;
     },
     getNombreImagen: function () {
       var id = Session.get("idNoticia");
-      return Mosaicos.findOne({_id: id}).nombreImagen;
+      return Mosaicos.findOne({idNoticia: id}).nombreImagen;
+    },
+    getLink: function () {
+      var id = Session.get("idNoticia");
+      return Mosaicos.findOne({idNoticia: id}).idNoticia;
     }
 
   });
@@ -326,26 +330,10 @@ Meteor.methods({
     }
   },
 
-  insertNoticias: function () {
+  clearNoticias: function () {
     
     Mosaicos.remove({});
     Titulares.remove({});
-
-    var Document1 = { "categoria" : "Redes Sociales", "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date(), "height" : 99, "idNoticia" : "noticia1", "nombreImagen" : "/i/01.jpg", "texto" : "La animación de Google recrea las distintas formas de viajar durante las fiestas en Navidad y te desea Felices fiestas", "titular" : "Felices fiestas: Google y su tercer doodle por Navidad", "width" : 176 };
-    var Document2 = { "idNoticia" : "noticia2", "titular" : "Facebook: no todos quieren recordar su año en la red social", "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", "categoria" : "Redes Sociales", "nombreImagen" : "/i/02.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document3 = { "idNoticia" : "noticia3", "titular" : "Mujeres pelean por regalos que peatones dieron a niños", "texto" : "Disputa entre adultos que al parecer exigen a sus hijos pedir limosna fue grabada entre calles Cádiz y Marconi, en San Isidro", "categoria" : "Lima", "nombreImagen" : "/i/03.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document4 = { "idNoticia" : "noticia4", "titular" : '"Cuatro pasos para salir de pulpín", por Eduardo Morón', "texto" : "Las empresas no buscan trabajadores, sino talento, y cuando lo encuentran esán dispuestos a pagar por retenerlo, dice Morán", "categoria" : "Economía", "nombreImagen" : "/i/04.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document5 = { "idNoticia" : "noticia5", "titular" : "Editorial: De maduro a rancio", "texto" : "Una vez más, el chavismo consolidó su control en las distintas instituciones del Estado.", "categoria" : "Opinión", "nombreImagen" : "/i/05.jpg",  "height" : 99, "width" : 176, "class" : "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document6 = { "idNoticia" : "noticia6", "titular" : "Hay más venta de viviendas en Lima norte pese a contracción", "texto" : "Comas, Carabayllo y SMP sintieron la retracción pero tuvieron mejor ritmo debido a los proyectos multifamiliares. ►Vender o alquilar un inmueble: Cuándo es conveniente hacerlo? ►► Piensas comprar una vivienda? Descubre lo que más te conviene", "categoria" : "Economía", "nombreImagen" : "/i/06.jpg", "height" : 404, "width" : 556, "class" : "ui-box ui-box3x3 ui-modtop2 ui-tiponota popup-voting", "createdAt" : new Date()};
-    var Document7 = { "idNoticia" : "noticia7", "titular" : "Diego Forlán: Chemo me llamó, pero no hay nada con la 'U'", "texto" : "Diego Forlán confirmó que tiene contrato en Japón, con lo que descartó posible llegada a Universitario de Deportes", "categoria" : "Deporte Total", "nombreImagen" : "/i/07.jpg", "height" : 205, "width" : 366, "class" : "ui-box ui-box2x2 ui-modleft ui-tiponota popup-voting", "createdAt" : new Date()};
-   
-    Mosaicos.insert(Document1);
-    Mosaicos.insert(Document2);
-    Mosaicos.insert(Document3);
-    Mosaicos.insert(Document4);
-    Mosaicos.insert(Document5);
-    Mosaicos.insert(Document6);
-    Mosaicos.insert(Document7);
    
   }
   
@@ -374,16 +362,19 @@ if (Meteor.isServer) {
         var getContent = HTTP.call("GET",'http://elcomercio.pe');
         var cheerio = Npm.require('cheerio'),
           $ = cheerio.load(getContent.content);
-        var link = [];
-        var clase = [];
-        var titular = [];
-        var categoria = [];
-        var texto = [];
-        var imgURL = [];
-        var imgHeight = [];
-        var imgWidgth = [];
+        var link = [],
+            clase = [],
+            style = "",
+            titular = [],
+            categoria = [],
+            texto = [],
+            imgURL = [],
+            imgHeight = [],
+            imgWidgth = [];
 
-        $('article.ui-box.ui-tiponota').each(function(i, elem) {
+        // console.log(clase);
+
+        $('article.ui-box').each(function(i, elem) {
           link[i] = $(this).find('figure > figcaption > h2 > a').attr('href');
           clase[i] = $(this).attr('class');
           titular[i] = $(this).find('figure > figcaption > h2 > a').text();
@@ -393,12 +384,49 @@ if (Meteor.isServer) {
           imgHeight[i] = $(this).find('figure > a > img').attr('height');
           imgWidgth[i] = $(this).find('figure > a > img').attr('width');
         });
-        // console.log(link.join('\n'));
-        // console.log(link.length);
+        // console.log(clase.join('\n'));
+        // console.log(clase.length);
+        // console.log(typeof(clase));
 
-        for (i = 0; i < 15; i++) {
-          
-          // if 
+        var box1x1 = [
+            "position: absolute; top: 7px; left: 15px;",
+            "position: absolute; top: 7px; left: 205px;",
+            "position: absolute; top: 7px; left: 395px;",
+            "position: absolute; top: 7px; left: 585px;",
+            "position: absolute; top: 7px; left: 775px;",
+            "position: absolute; top: 775px; left: 395px;",
+            "position: absolute; top: 775px; left: 585px;",
+            "position: absolute; top: 775px; left: 775px;",
+            "position: absolute; top: 965px; left: 395px;",
+            "position: absolute; top: 1155px; left: 15px;",
+            "position: absolute; top: 1155px; left: 205px;",
+            "position: absolute; top: 1155px; left: 395px;"
+            ],
+            box2x2 = [
+            "position: absolute; top: 775px; left: 15px;",
+            "position: absolute; top: 965px; left: 585px;"
+            ],
+            box3x3 = "position: absolute; top: 197px; left: 15px;",
+            b1x1 = 0,
+            b2x2 = 0;
+
+        for (i = 0; i < 16; i++) {
+          // console.log(clase[i])
+          if (clase[i].indexOf("ui-box1x1") >= 0) {
+            style = box1x1[b1x1];
+            b1x1 += 1;
+          } else if (clase[i].indexOf("ui-box2x2") >= 0) {
+            style = box2x2[b2x2];
+            b2x2 += 1;
+          } else if (clase[i].indexOf("ui-box3x3") >= 0) {
+            style = box3x3;
+          } else {
+            style = "display: none;"
+          }
+          console.log(i + ". " + titular[i]);
+          console.log(style);
+          console.log(clase[1] + "\n");
+
           Mosaicos.insert({ 
             "idNoticia" : link[i], 
             "titular" : titular[i], 
@@ -408,6 +436,7 @@ if (Meteor.isServer) {
             "height" : imgHeight[i], 
             "width" : imgWidgth[i], 
             "class" : clase[i] + " popup-voting", 
+            "style" : style, 
             "createdAt" : new Date()
           }); 
 
@@ -418,6 +447,7 @@ if (Meteor.isServer) {
   }); 
 
 }
+
 
         /* JSON FROM API
         {
