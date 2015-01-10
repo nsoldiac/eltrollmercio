@@ -36,55 +36,17 @@
 							</div>
 						</li>
 						<li class="u-fecha-clima">{{fecha}} | 21 °C</li>
-						<!-- <li class="u-buscar">
-							<form method="get" action="//elcomercio.pe/buscar/" onSubmit="gec.fn.buscar(this,event);">
-								<input type="text" name="b" placeholder="Buscar" disabled>
-								<button type="submit" disabled>&#xf002;</button>
-							</form>
-						</li> -->
 					</ul>
 				</div>
 
 				<div class="leaderboard">
 					<table>
 						<tr>
-							<th colspan="3">Usuarios Top</th>
+							<th colspan="3">Usuarios Top <br> <span style="font-size:12px;">(actualizada a las 12am)</span></th>
 						</tr>
-						<tr>
-							<td>1.</td>
-							<td>nsoldiac</td>
-							<td>15 pts.</td>
-						</tr>
-						<tr>
-							<td>2.</td>
-							<td>test</td>
-							<td>6 pts.</td>
-						</tr>
-						<tr>
-							<td>3.</td>
-							<td>test2</td>
-							<td>0 pts.</td>
-						</tr>
-						<tr>
-							<td>4.</td>
-							<td>nsoldiac</td>
-							<td>15 pts.</td>
-						</tr>
-						<tr>
-							<td>5.</td>
-							<td>test</td>
-							<td>6 pts.</td>
-						</tr>
-						<tr>
-							<td>6.</td>
-							<td>test2</td>
-							<td>0 pts.</td>
-						</tr>
-						<tr>
-							<td>7.</td>
-							<td>test2</td>
-							<td>0 pts.</td>
-						</tr>
+						{{#each topLeaders}}
+							{{> topLider}}
+						{{/each}}
 					</table>
 				</div>
 				
@@ -93,7 +55,7 @@
 						<span id="trollmercio">El Trollmercio</span>
 						<span id="anios1">{{desdeCuando}}</span>
 					</div>
-					<div class="subtitulo">Lo que la gente opina de los titulares de El Comercio <br> (1 punto por titular, 3 puntos por voto a tu titular)</div>
+					<div class="subtitulo">Lo que la gente opina de los titulares de El Comercio<br><br>1. Crea tu cuenta (arriba a la izq.) 2. Haz click en cualquier noticia (abajo). 3. Vota por cualquier titular o crea algunos y gana puntos! <br>(1 punto por titular, 7 puntos por voto a tu titular)</div>
 					
 				</div>
 			</header>
@@ -105,16 +67,19 @@
 							<li class="m-home">
 								<a  class="active" >Lo Ultimo</a>
 							</li>
-							<li class="m-politica ">
+							<li class="m-placeholder">
     							<a>Lo mejor del día</a>
 							</li>	    					
-							<li class="m-gastronomia ">
+							<li class="m-placeholder ">
     							<a>De la semana</a>
 							</li>
-							<li class="opinion ">
+							<li class="m-placeholder">
     							<a>Del mes</a>
 							</li>
-							<li class="sb-item html-get">
+							<li class="sb-item titulares-user">
+								<a>Estadisticas de Usuario</a>
+							</li>
+							<li class="html-get sb-item ">
 								<a>html.get('elcomercio.pe')</a>
 							</li>
 
@@ -146,6 +111,7 @@
 </article>		
 
 </div>	
+
 <div class="footer">
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam voluptas, accusantium, esse, maxime harum eligendi fugiat nobis ea distinctio veritatis aliquid veniam voluptates ab similique voluptatem earum animi sequi nemo ipsam. </p>
 </div>
@@ -177,6 +143,14 @@
 </script>
 
 </body>
+
+<template name="topLider">
+	<tr>
+		<td>{{puesto}}.</td>
+		<td>{{usuario}}</td>
+		<td>{{puntos}}</td>
+	</tr>
+</template>
 
 <template name="comments">
   <tr class="listaTitulares">

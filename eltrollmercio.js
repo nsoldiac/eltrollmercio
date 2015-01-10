@@ -1,15 +1,20 @@
 Titulares = new Mongo.Collection("titulares");
 Mosaicos = new Mongo.Collection("mosaicos");
+Leaders = new Mongo.Collection("leaders");
 
 if (Meteor.isClient) {
   // This code only runs on the client
   
   Meteor.subscribe("titulares-prueba");
   Meteor.subscribe("mosaicos-prueba");
+  Meteor.subscribe("leaderboard");
   
   Template.body.helpers({
     items: function () {
       return Mosaicos.find({}, {sort: {createdAt: -1}, limit: 16}); 
+    },
+    topLeaders: function () {
+      return Leaders.find({}, {sort: {puesto: 1}, limit: 7}); 
     },
     fecha: function () {
       var date = new Date();
@@ -34,13 +39,13 @@ if (Meteor.isClient) {
       var todo = d + " de " + months[m] + " del " + y;
       return todo;
     },
-    puntos: function (user) {
-      var total = 0;
+    puntos: function () {
+     var total = 0;
       var result = Titulares.find( { owner: Meteor.userId() } );
       result.forEach(function (doc) {
-        total += doc.votos;
+        total += doc.votos * 7;
+        total += 1;
       });
-
       return total + " ptos.";
     },
     desdeCuando: function () {
@@ -50,10 +55,11 @@ if (Meteor.isClient) {
       total = Math.round(total * 100) / 100;
 
       return total;
+    },
+    leaderboard: function() {
+      console.log("")
+      // Return json object with each 
     }
-    // jsonTest: function () {
-    //   return Meteor.call("sampleCall");
-    // }
   });
 
   Template.body.events({
@@ -62,6 +68,15 @@ if (Meteor.isClient) {
     },
     "click .html-get": function () {
       Meteor.call("sampleCall");
+    },
+    "click .m-placeholder, click .titulares-user": function () {
+      window.alert("En porceso de construcción...");
+    },
+    "click div.leaderboard>table>tr:first-child": function () {
+      // window.alert("So far so good");
+      if (Meteor.user().username == 'nsoldiac'){
+        Meteor.call("recalculateLeaderboard");
+      }
     }
   });
 
@@ -131,9 +146,9 @@ if (Meteor.isClient) {
       var total = 0;
       var result = Titulares.find( { owner: user } );
       result.forEach(function (doc) {
-        total += doc.votos;
+        total += doc.votos * 7;
+        total += 1;
       });
-      // console.log(total);
       return total;
     },
     upV: function (id) {
@@ -201,6 +216,22 @@ if (Meteor.isClient) {
 
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
+  });
+
+  Meteor.startup(function() {
+    $(document).ready(function() {
+        // show google analytics if running on the live web site
+        if ( -1 != document.URL.indexOf("http://eltrollmercio.com/") )
+        {
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', 'UA-21812321-3', 'auto');
+          ga('send', 'pageview');
+        }
+    });
   });
 
 }
@@ -336,7 +367,6 @@ Meteor.methods({
     Titulares.remove({});
    
   }
-  
 });
 
 if (Meteor.isServer) {
@@ -351,6 +381,10 @@ if (Meteor.isServer) {
 
    Meteor.publish("mosaicos-prueba", function () {
     return Mosaicos.find();
+  });
+
+   Meteor.publish("leaderboard", function () {
+    return Leaders.find();
   });
 
   // HTTP call and parsing section
@@ -384,9 +418,6 @@ if (Meteor.isServer) {
           imgHeight[i] = $(this).find('figure > a > img').attr('height');
           imgWidgth[i] = $(this).find('figure > a > img').attr('width');
         });
-        // console.log(clase.join('\n'));
-        // console.log(clase.length);
-        // console.log(typeof(clase));
 
         var box1x1 = [
             "position: absolute; top: 7px; left: 15px;",
@@ -442,50 +473,52 @@ if (Meteor.isServer) {
 
         }
 
+      },
+      recalculateLeaderboard: function() {
+        Leaders.remove({});
+
+        var points = 0;
+        var titus = Titulares.find();
+
+        titus.forEach(function (doc) {
+          points = 0;
+          var own = doc.ownerName;
+          if ( Leaders.find({usuario: own}).count() == 0 ) {
+            points = doc.votos * 7;
+            Leaders.insert(
+              {
+                puesto: 0,
+                usuario: own,
+                puntos: points + 1
+              }
+            )
+          } else if ( Leaders.find({usuario: own}).count() > 0 ){
+            points = Leaders.findOne({usuario: own}).puntos;
+            points += doc.votos * 7;
+            points += 1
+
+            Leaders.update(
+              {usuario: own},
+              {$set: {puntos: points}}
+            );
+            // console.log(doc.ownerName + " - " + doc.titular + " - votos: " + doc.votos);
+          } else {
+            console.log("Something unexpected happened");
+          }
+
+          var p = 1;
+          Leaders.find({}, {sort: {puntos: -1}}).forEach(function (post) {
+            Leaders.update({usuario: post.usuario}, {$set: {puesto: p}});
+            p += 1;
+            // console.log("p: " + p);
+          });
+        });
+        
       }
 
   }); 
 
 }
-
-
-        /* JSON FROM API
-        {
-          "Titular": {
-            "href": "http://elcomercio.pe/redes-sociales/google/ano-nuevo-2015-google-le-da-bienvenida-este-doodle-noticia-1782141?flsm=1",
-            "class": "bi3dArtId-1782141 bi3dArtType-photo bi3dHtext",
-            "text": "Google le da la bienvenida al 2015 con este doodle"
-          },
-          "Foto": {
-            "height": "99",
-            "width": "176",
-            "alt": "Año Nuevo 2015: Google le da la bienvenida con este doodle",
-            "src": "http://cde.3.elcomercio.pe/ima/0/1/0/3/3/1033566/366x205.jpg",
-            "href": "http://elcomercio.pe/redes-sociales/google/ano-nuevo-2015-google-le-da-bienvenida-este-doodle-noticia-1782141",
-            "text": ""
-          },
-          "Categoria": { 
-            "href": "http://elcomercio.pe/redes-sociales",
-            "text": "Redes Sociales"
-          },
-          "Texto": ""
-        }
-
-        // JSON FOR MONGO INSERT
-        {
-          "idNoticia" : "noticia2", 
-          "titular" : "Facebook: no todos quieren recordar su año en la red social", 
-          "texto" : "Cada fin de año, es tradición repasar los momentos vividos. Sin embargo, es necesario que Facebook lo publique?", 
-          "categoria" : "Redes Sociales", 
-          "nombreImagen" : "02.jpg",
-          "height" : 99, 
-          "width" : 176, 
-          "class" : 
-          "ui-box ui-box1x1 ui-modleft ui-tiponota popup-voting", 
-          "createdAt" : new Date()
-        }
-
-        */
 
 
 

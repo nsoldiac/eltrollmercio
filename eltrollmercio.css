@@ -49,13 +49,10 @@ form.nuevo-titular {
 
 table.titularesAlternativos {
 	width: 100%;
-/*	margin-left: 10px;
-	margin-right: 10px;*/
 }
 
 table.titularesAlternativos th {
 	border-bottom: solid 1px gray;
-	/*position: fixed;*/
 }
 
 tr.listaTitulares {
@@ -73,14 +70,12 @@ tr.listaTitulares>th {
 td.votos {
 	padding: 10px;
 	vertical-align: top;
-	/*border: dotted 1px gray;*/
 	text-align: center;
 }
 
 .titularAlternativo {
 	padding: 10px 10px 10px 10px;
 	vertical-align: top;
-	/*border: dotted 1px gray;*/
 }
 
 .titularAlternativo span {
@@ -90,11 +85,10 @@ td.votos {
 td.eliminar {
 	padding: 10px;
 	vertical-align: top;
-	/*border: dotted 1px gray;*/
 	text-align: center;
 }
 
-table.titularesAlternativos>tr:nth-child(2) { /*, table.titularesAlternativos>tr:nth-child(3), table.titularesAlternativos>tr:nth-child(4) {*/
+table.titularesAlternativos>tr:nth-child(2) { 
 	background-color: white;
 }
 
@@ -241,8 +235,9 @@ button.borrar {
 .subtitulo {
 	font-family: 'prelomedium';
 	font-weight: bold;
+	font-size: 14px;
 	color: #5b4b05;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	margin-right: 0px;
 }
 
@@ -276,7 +271,7 @@ button.borrar {
 
 .nuevo-logo {
 	text-align: center;
-	margin-top: 25px;
+	margin-top: 10px;
 	padding-right: 0px;
 }
 
@@ -303,6 +298,7 @@ div.leaderboard {
 	border-radius: 3px;
 	min-width: 120px;
 	max-width: 170px;
+	overflow: scroll;
 }
 
 div.leaderboard>table {
