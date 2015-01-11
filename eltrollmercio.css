@@ -346,6 +346,15 @@ div.leaderboard>table>tr>td:nth-child(2) {
 	cursor: pointer;
 }
 
+span.fuente {
+	z-index: 99999;
+	font-size: 11px;
+	color: white;
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+}
+
 /* ESTRUCTURA GENERAL
 ========================================================================== */
 /* CALENDARIO */

@@ -56,9 +56,14 @@ if (Meteor.isClient) {
 
       return total;
     },
-    leaderboard: function() {
-      console.log("")
-      // Return json object with each 
+    isAdmin: function () {
+      var admins = ['nsoldiac', 'elcoordi', 'arturodr'];
+      var user = Meteor.user().username;
+      if (admins.indexOf(user) >= 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   });
 
@@ -67,15 +72,18 @@ if (Meteor.isClient) {
       Meteor.call("clearNoticias");
     },
     "click .html-get": function () {
-      Meteor.call("sampleCall");
+      Meteor.call("httpGetCall");
     },
     "click .m-placeholder, click .titulares-user": function () {
       window.alert("En porceso de construcción...");
+
     },
     "click div.leaderboard>table>tr:first-child": function () {
       // window.alert("So far so good");
       if (Meteor.user().username == 'nsoldiac'){
         Meteor.call("recalculateLeaderboard");
+        console.log(returnAdmins);
+        console.log("termine");
       }
     }
   });
@@ -392,7 +400,7 @@ if (Meteor.isServer) {
 
   Meteor.methods({
 
-    sampleCall: function () {
+    httpGetCall: function () {
         var getContent = HTTP.call("GET",'http://elcomercio.pe');
         var cheerio = Npm.require('cheerio'),
           $ = cheerio.load(getContent.content);
@@ -517,6 +525,25 @@ if (Meteor.isServer) {
       }
 
   }); 
+
+  
+  
+  var foo = function () {
+      console.log('Ran \"recalculateLeaderboard\"');
+      Meteor.call("recalculateLeaderboard");
+    }
+
+  var bar = function () {
+      console.log('Ran \"recalculateLeaderboard\"');
+      Meteor.call("httpGetCall");
+    }
+
+  var cron = new Meteor.Cron( {
+    events:{
+      "0 * * * *"  : foo,
+      "0 2-14 * * *" : bar
+    }
+  });
 
 }
 
