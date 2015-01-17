@@ -14,7 +14,7 @@ if (Meteor.isClient) {
       return Mosaicos.find({}, {sort: {createdAt: -1}, limit: 16}); 
     },
     topLeaders: function () {
-      return Leaders.find({}, {sort: {puesto: 1}, limit: 7}); 
+      return Leaders.find({}, {sort: {puesto: 1}, limit: 10}); 
     },
     fecha: function () {
       var date = new Date();
@@ -526,8 +526,6 @@ if (Meteor.isServer) {
 
   }); 
 
-  
-  
   var foo = function () {
       console.log('Ran \"recalculateLeaderboard\"');
       Meteor.call("recalculateLeaderboard");
@@ -541,7 +539,7 @@ if (Meteor.isServer) {
   var cron = new Meteor.Cron( {
     events:{
       "0 * * * *"  : foo,
-      "0 2-14 * * *" : bar
+      "*/15 2-14 * * *" : bar
     }
   });
 

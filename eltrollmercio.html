@@ -42,11 +42,15 @@
 				<div class="leaderboard">
 					<table>
 						<tr>
-							<th colspan="3">Usuarios Top <br> <span style="font-size:12px;">(actualiza a las 12am)</span></th>
+							<th colspan="3">Usuarios Top <br> <span style="font-size:12px;">(actualiza cada 15min)</span></th>
 						</tr>
-						{{#each topLeaders}}
-							{{> topLider}}
-						{{/each}}
+						<div class="innerLeaderboard">
+							<table>
+								{{#each topLeaders}}
+									{{> topLider}}
+								{{/each}}
+							</table>
+						</div>
 					</table>
 				</div>
 				
@@ -55,7 +59,8 @@
 						<span id="trollmercio">El Trollmercio</span>
 						<span id="anios1">{{desdeCuando}}</span>
 					</div>
-					<div class="subtitulo">Lo que la gente opina de los titulares de El Comercio<br><br>1. Crea tu cuenta (arriba a la izq.) 2. Haz click en cualquier noticia (abajo). 3. Vota por cualquier titular o crea algunos y gana puntos! <br>(1 punto por titular, 7 puntos por voto a tu titular)</div>
+					<div class="subtitulo">Lo que la gente opina de los titulares de El Comercio</div>
+					<div class="instrucciones">1. Crea tu cuenta (arriba a la izq.) 2. Haz click en una noticia. 3. Vota por un titular o crea el tuyo y gana puntos! (1 punto por titular, 7 puntos por voto a tu titular)</div>
 					
 				</div>
 			</header>
