@@ -69,7 +69,10 @@ if (Meteor.isClient) {
 
   Template.body.events({
     "click .agregar-data": function () {
-      Meteor.call("clearNoticias");
+      if (Meteor.user().username == 'nsoldiac'){
+        Meteor.call("clearNoticias");
+        // console.log(returnAdmins);
+      }
     },
     "click .html-get": function () {
       Meteor.call("httpGetCall");
@@ -78,11 +81,11 @@ if (Meteor.isClient) {
       window.alert("En porceso de construcción...");
 
     },
-    "click div.leaderboard>table>tr:first-child": function () {
+    "click div#leaderboard-header": function () {
       // window.alert("So far so good");
       if (Meteor.user().username == 'nsoldiac'){
         Meteor.call("recalculateLeaderboard");
-        console.log(returnAdmins);
+        // console.log(returnAdmins);
         console.log("termine");
       }
     }
@@ -538,8 +541,8 @@ if (Meteor.isServer) {
 
   var cron = new Meteor.Cron( {
     events:{
-      "0 * * * *"  : foo,
-      "*/15 2-14 * * *" : bar
+      "*/15 * * * *"  : foo,
+      "* 2-14 * * *" : bar
     }
   });
 
